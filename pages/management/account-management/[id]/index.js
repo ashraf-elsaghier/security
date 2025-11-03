@@ -101,7 +101,6 @@ const AccountManagement = () => {
 
   const allAccountInfo = useSelector((state) => state?.accountInfo);
 
-
   useEffect(async () => {
     const response = await axios({
       method: "get",
@@ -109,8 +108,6 @@ const AccountManagement = () => {
     });
     setAccStatus(...response.data.accountsStatistics);
   }, []);
-
-
 
   useEffect(() => {
     allAccountInfos.forEach((item) => {
@@ -137,11 +134,7 @@ const AccountManagement = () => {
 
   useEffect(() => {
     allAccountData?.length === 0 &&
-      fetchData(
-        setLoading,
-        setAccountInfos,
-        `dashboard/management/accounts`
-      );
+      fetchData(setLoading, setAccountInfos, `dashboard/management/accounts`);
 
     // parentAccounts;
     allUnAssignedAccountInfos?.length === 0 &&
@@ -196,12 +189,9 @@ const AccountManagement = () => {
     setAllAccountInfos([...allAccountInfos]);
 
     await axios
-      .put(
-        `dashboard/management/accounts/${AccountID}`,
-        {
-          StatusID: currItem[0].StatusID ? 0 : 1,
-        }
-      )
+      .put(`dashboard/management/accounts/${AccountID}`, {
+        StatusID: currItem[0].StatusID ? 0 : 1,
+      })
       .then((response) => {
         if (response.status === 200) {
           fetchData(
@@ -235,8 +225,13 @@ const AccountManagement = () => {
               className=" w-100"
               style={{ marginTop: "-10px", display: "flex", gap: "1rem" }}
             >
-              <Link href={`/management/ItemVehicleManagment/${params.data.AccountID}`}              >
-                <span className="account-vehicles" style={{ color: "#1675e0", cursor: "pointer" }}         >
+              <Link
+                href={`/management/ItemVehicleManagment/${params.data.AccountID}`}
+              >
+                <span
+                  className="account-vehicles"
+                  style={{ color: "#1675e0", cursor: "pointer" }}
+                >
                   {/* {t("user_role")} */}
                   {t("Manage_Vehicles")}
                 </span>
@@ -254,7 +249,12 @@ const AccountManagement = () => {
 
               <button
                 className="edit-account"
-                style={{ display: "flex", gap: "1rem", color: "#1675e0", backgroundColor: "transparent" }}
+                style={{
+                  display: "flex",
+                  gap: "1rem",
+                  color: "#1675e0",
+                  backgroundColor: "transparent",
+                }}
               >
                 <span
                   onClick={() => handleEditAccount(params.data.AccountID)}
@@ -449,7 +449,12 @@ const AccountManagement = () => {
 
     for (const key in obj) {
       const value = obj[key];
-      if (value !== "" && value !== null && value !== "undefined" && value !== undefined) {
+      if (
+        value !== "" &&
+        value !== null &&
+        value !== "undefined" &&
+        value !== undefined
+      ) {
         result[key] = value;
       }
     }
@@ -464,7 +469,7 @@ const AccountManagement = () => {
     allAccountInfos.forEach((item) => {
       if (item.AccountID === idForNowAccount) {
         item.AccountName = accountName;
-        item?.NextBillingDate = `${nextBillingDate}T00:00:00.000Z`;
+        item.NextBillingDate = `${nextBillingDate}T00:00:00.000Z`;
         item.ParentAccountID = +parentAccount;
         item.IsDistributor = IsDistributor;
       }
@@ -485,8 +490,7 @@ const AccountManagement = () => {
           AccountName: accountName,
           IsDistributor,
           ParentAccountID: parentAccount,
-        }),
-
+        })
       )
       .then((response) => {
         if (response.status === 200) {
@@ -604,9 +608,7 @@ const AccountManagement = () => {
                     overlayNoRowsTemplate={
                       loading
                         ? "Loading..."
-                        : !loading &&
-                        !accountInfos?.length &&
-                        "No Data to Show"
+                        : !loading && !accountInfos?.length && "No Data to Show"
                     }
                     suppressMenuHide={true}
                   />
@@ -647,8 +649,8 @@ const AccountManagement = () => {
                     loading
                       ? "Loading..."
                       : !loading &&
-                      !allUnAssignedAccountInfos.length &&
-                      "No Data to Show"
+                        !allUnAssignedAccountInfos.length &&
+                        "No Data to Show"
                   }
                   suppressMenuHide={true}
                 />
@@ -737,23 +739,23 @@ const AccountManagement = () => {
                           >
                             {parentAccounts?.length > 0
                               ? parentAccounts?.map((item) =>
-                                parentAccounts?.indexOf(item) === 0 ? (
-                                  <option
-                                    key={item.AccountID}
-                                    selected
-                                    value={item.AccountID}
-                                  >
-                                    {item.AccountName}
-                                  </option>
-                                ) : (
-                                  <option
-                                    key={item.AccountID}
-                                    value={item.AccountID}
-                                  >
-                                    {item.AccountName}
-                                  </option>
+                                  parentAccounts?.indexOf(item) === 0 ? (
+                                    <option
+                                      key={item.AccountID}
+                                      selected
+                                      value={item.AccountID}
+                                    >
+                                      {item.AccountName}
+                                    </option>
+                                  ) : (
+                                    <option
+                                      key={item.AccountID}
+                                      value={item.AccountID}
+                                    >
+                                      {item.AccountName}
+                                    </option>
+                                  )
                                 )
-                              )
                               : "Loading..."}
                           </select>
                         </Form.Group>
@@ -816,7 +818,6 @@ const AccountManagement = () => {
   );
 };
 
-
 export default AccountManagement;
 
 export async function getServerSideProps(context) {
@@ -834,7 +835,12 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["Management", "main", "Tour", "common"])),
+      ...(await serverSideTranslations(context.locale, [
+        "Management",
+        "main",
+        "Tour",
+        "common",
+      ])),
     },
   };
 }

@@ -242,7 +242,7 @@ const InputsFilter = ({
                     plateNumberRef.current?.value = "";
                     addressRef.current?.value = "";
                     speedToRef.current?.value = "";
-                    speedFromRef.current?.value = "";
+                    speedFromRef.current.value = "";
                     setAllTreeData(vehicles);
                     setFilterStatus("InputFilter");
                     setfilterBy(item);

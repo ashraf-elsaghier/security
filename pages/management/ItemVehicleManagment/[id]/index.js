@@ -10,7 +10,8 @@ import {
   faSimCard,
   faFileExport,
   faTrash,
-  faUserEdit, faFileDownload,
+  faUserEdit,
+  faFileDownload,
   faExternalLinkAlt,
   // faFileCsv,
 } from "@fortawesome/free-solid-svg-icons";
@@ -25,7 +26,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchVehicles } from "../../../../lib/slices/vehicleInfo";
 import { useRouter } from "next/router";
 import AgGridDT from "../../../../components/AgGridDT";
-import { deleteVehicle, fetchAllUnAssignedVehicles, fetchAllVehicles, fetchVehilceStatistics, postVehiclesBulk } from "services/management/VehicleManagement";
+import {
+  deleteVehicle,
+  fetchAllUnAssignedVehicles,
+  fetchAllVehicles,
+  fetchVehilceStatistics,
+  postVehiclesBulk,
+} from "services/management/VehicleManagement";
 import Bulk from "components/management/Bulk";
 import Model from "components/UI/Model";
 import AssignDevice from "components/management/VehicleManagement/AssignDevice";
@@ -39,10 +46,10 @@ const ItemVehicleManagment = () => {
   const [unassignedVehicles, setUnassignedVehicles] = useState(null);
   const [unassignedGridApi, setUnassignedGridApi] = useState(null);
   const [unassignedGridColumnApi, setUnassignedGridColumnApi] = useState(null);
-  const [vehiclesStatistics, setVehiclesStatistics] = useState({})
+  const [vehiclesStatistics, setVehiclesStatistics] = useState({});
   const { AllData /* loading */ } = useSelector((state) => state.vehicleInfo);
   const Assigned = AllData?.filter((ele) => ele.VehicleID !== null);
-  const [assignedVehicleID, setAssignVehicleID] = useState(null)
+  const [assignedVehicleID, setAssignVehicleID] = useState(null);
   const [assignModalShow, setAssignModalShow] = useState(false);
   const [editID, setEditID] = useState("");
   const [editModalShow, setEditModalShow] = useState(false);
@@ -92,7 +99,7 @@ const ItemVehicleManagment = () => {
 
   const onAssigndGridReady = useCallback(async (params) => {
     try {
-      const respond = await fetchAllVehicles();      
+      const respond = await fetchAllVehicles();
       setAssignedVehicles(respond.Vehicles);
       setAssignedGridApi(params.api);
       setAssignedGridColumnApi(params.columnApi);
@@ -111,7 +118,6 @@ const ItemVehicleManagment = () => {
     }
   }, []);
 
-
   const onDelete = async () => {
     setloadingDelete(true);
 
@@ -119,7 +125,7 @@ const ItemVehicleManagment = () => {
       const respond = await deleteVehicle(deleteObj.id);
       toast.success(respond.message);
       setloadingDelete(false);
-      setshowModalDelete(false);      
+      setshowModalDelete(false);
       if (deleteObj.isAssignTable) {
         setAssignedVehicles((prev) =>
           prev.filter((ele) => ele.VehicleID !== deleteObj.id)
@@ -173,7 +179,7 @@ const ItemVehicleManagment = () => {
   };
 
   // useEffect(() => {
-  //   if(AllData) 
+  //   if(AllData)
   //     setAssignedVehicles(AllData?.filter((ele) => ele.VehicleID !== null))
   // }, [AllData])
   const columnsAssigned = useMemo(
@@ -188,28 +194,15 @@ const ItemVehicleManagment = () => {
               <a className="text-decoration-underline">{params.value}</a>
             </Link>
             <div className="d-flex justify-content-start flex-wrap gap-1 options ">
-
-              <span className=" px-2 mt-0">
-
-                {t("edit")}
-              </span>
-              <span className="px-2  mt-0">
-                x
-
-                {t("delete")}
-              </span>
-              <span className=" px-2 mt-0">
-
-
-                {t("Deactivate")}
-              </span>
+              <span className=" px-2 mt-0">{t("edit")}</span>
+              <span className="px-2  mt-0">x{t("delete")}</span>
+              <span className=" px-2 mt-0">{t("Deactivate")}</span>
               <span className="px-2  mt-0">
                 {/* <FontAwesomeIcon className="pe-2" icon={faCar} size="lg" /> */}
                 {/* {t("reset_password")} */}
 
                 {t("Show_Vehicles")}
               </span>
-
             </div>
           </>
         ),
@@ -355,7 +348,7 @@ const ItemVehicleManagment = () => {
       {
         headerName: `${t("Display_Name")}`,
         field: "DisplayName",
-        minWidth:300,
+        minWidth: 300,
         cellRenderer: (params) => (
           <>
             <div>{params.value ?? "N/A"}</div>
@@ -391,7 +384,6 @@ const ItemVehicleManagment = () => {
                 | {t("delete")}
               </span>
             </div>
-
           </>
         ),
       },
@@ -435,7 +427,6 @@ const ItemVehicleManagment = () => {
         minWidth: 120,
         sortable: true,
         unSortIcon: true,
-
       },
     ],
     [t]
@@ -491,14 +482,18 @@ const ItemVehicleManagment = () => {
                 iconColor="success"
                 title="Inactive_Vehicles"
                 countEnd={vehiclesStatistics?.Inactive_Vehicles || 0}
-                desc={t("Vehicles that didn't send any data for more than one minute.")}
+                desc={t(
+                  "Vehicles that didn't send any data for more than one minute."
+                )}
               />
               <CardCountStart
                 icon={faUsersCog}
                 iconColor="warning"
                 title="Unassigned_Devices"
                 countEnd={vehiclesStatistics?.unassignedDevices || 0}
-                desc={t("Devices that are Added to the system but not yet assigned to a vehicle.")}
+                desc={t(
+                  "Devices that are Added to the system but not yet assigned to a vehicle."
+                )}
               />
               <CardCountStart
                 icon={faUserEdit}
@@ -525,7 +520,6 @@ const ItemVehicleManagment = () => {
                                 size="sm"
                               />
                               {t("Add_Vehicle")}
-
                             </button>
                           </Link>
 
@@ -578,7 +572,7 @@ const ItemVehicleManagment = () => {
                       onFirstDataRendered={onFirstDataRendered}
                       defaultColDef={defaultColDef}
                       onCellMouseOver={(e) =>
-                        (e?.event?.target?.dataset?.test = "showActions")
+                        (e.event.target.dataset.test = "showActions")
                       }
                       onCellMouseOut={HideActions}
                       onGridReady={onAssigndGridReady}
@@ -724,7 +718,11 @@ export default ItemVehicleManagment;
 export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["Management", "main", "common"])),
+      ...(await serverSideTranslations(locale, [
+        "Management",
+        "main",
+        "common",
+      ])),
     },
   };
 }
