@@ -1,0 +1,67 @@
+.management {
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: 600;
+
+      input {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .items-parking-parent {
+    padding: 20px 10px;
+    box-shadow: 5px 5px 20px 0px rgba(0, 44, 40, 0.2);
+    border-radius: 16px 16px 0px 0px;
+    height: 360px;
+  }
+
+  .items-parking {
+    padding: 20px 10px;
+    height: 360px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+
+  .items-out-parking {
+    padding: 20px 10px;
+    height: 360px;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+
+  .management-container {
+    padding: 20px 10px;
+    box-shadow: 5px 5px 20px 0px rgba(0, 44, 40, 0.2);
+    border-radius: 16px 16px 0px 0px;
+
+    .items-ungrouped,
+    .items-grouped {
+      padding: 20px 10px;
+      height: 348px;
+      overflow: auto;
+      overflow-x: hidden;
+    }
+  }
+
+  // Select
+  .css-1s2u09g-control {
+    background-color: inherit;
+  }
+
+  .css-1pahdxg-control {
+    background-color: inherit;
+  }
+
+  .css-qc6sy-singleValue {
+    color: inherit;
+  }
+}
+
+.dark .css-26l3qy-menu {
+  background-color: #222738;
+}

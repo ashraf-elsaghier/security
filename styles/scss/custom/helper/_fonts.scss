@@ -1,0 +1,39 @@
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@font-face {font-family: "Trasandina W03 Regular Italic";
+  src: url("../../../fonts/TrasandinaW03MediumItalic/@font-face/e0a98cebeded7317eb4e1d40cf483eb4.eot"); /* IE9*/
+  src: url("../../../fonts/TrasandinaW03MediumItalic/@font-face/e0a98cebeded7317eb4e1d40cf483eb4.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../../../fonts/TrasandinaW03MediumItalic/@font-face/e0a98cebeded7317eb4e1d40cf483eb4.woff2") format("woff2"), /* chrome、firefox */
+  url("../../../fonts/TrasandinaW03MediumItalic/@font-face/e0a98cebeded7317eb4e1d40cf483eb4.woff") format("woff"), /* chrome、firefox */
+  url("../../../fonts/TrasandinaW03MediumItalic/@font-face/e0a98cebeded7317eb4e1d40cf483eb4.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("../../../fonts/TrasandinaW03MediumItalic/@font-face/e0a98cebeded7317eb4e1d40cf483eb4.svg##Trasandina W03 Medium Italic") format("svg"); /* iOS 4.1- */
+}
+@font-face {font-family: "Trasandina W03 Regular Italic";
+  src: url("../../../fonts/TrasandinaW03RegularItalic/@font-face/cd07898f22f34c2bf01b4456970b78b7.eot"); /* IE9*/
+  src: url("../../../fonts/TrasandinaW03RegularItalic/@font-face/cd07898f22f34c2bf01b4456970b78b7.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../../../fonts/TrasandinaW03RegularItalic/@font-face/cd07898f22f34c2bf01b4456970b78b7.woff2") format("woff2"), /* chrome、firefox */
+  url("../../../fonts/TrasandinaW03RegularItalic/@font-face/cd07898f22f34c2bf01b4456970b78b7.woff") format("woff"), /* chrome、firefox */
+  url("../../../fonts/TrasandinaW03RegularItalic/@font-face/cd07898f22f34c2bf01b4456970b78b7.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("../../../fonts/TrasandinaW03RegularItalic/@font-face/cd07898f22f34c2bf01b4456970b78b7.svg#Trasandina W03 Regular Italic") format("svg"); /* iOS 4.1- */
+}
+
+@font-face {
+  font-family: 'TheSans', sans-serif;
+  src: url("../../../fonts/theSans/thesans-bold.eot");
+  src: url("../../../fonts/theSans/thesans-bold.eot?#iefix") format("embedded-opentype"),
+  url('../../../fonts/theSans/thesans-bold.woff2')  format("woff2"),
+  url('../../../fonts/theSans/thesans-bold.woff')  format("woff"),
+  url('../../../fonts/theSans/thesans-bold.ttf')  format("truetype"),
+  url('../../../fonts/theSans/thesans-bold.svg#TheSans')  format("svg");
+  
+}
+
+@font-face {
+  font-family:'TheSansArabic Light', sans-serif ;
+  src: url('../../../fonts/TheSansLight/thesansarabiclight.eot');
+  src: url('../../../fonts/TheSansLight/thesansarabiclight.eot?#iefix') format("embedded-opentype"),
+  url('../../../fonts/TheSansLight/thesansarabiclight.woff2') format('woff2'),
+  url('../../../fonts/TheSansLight/thesansarabiclight.woff') format('woff'),
+  url('../../../fonts/TheSansLight/thesansarabiclight.ttf') format('truetype'),
+  url('../../../fonts/TheSansLight/thesansarabiclight.svg#TheSansArabic Light') format('svg')
+}

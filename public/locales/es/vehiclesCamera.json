@@ -1,0 +1,13 @@
+{
+  "drivers_name": "Nombre del conductor",
+  "plate_number": "Número de placa",
+  "serial_number": "Número de serie",
+  "license_number": "Número de licencia",
+  "history_playback": "Reproducción de historial",
+  "show_camera": "Mostrar cámara",
+  "camera": "Cámara",
+  "view_playback": "Ver reproducción",
+  "back": "Atrás",
+  "next": "Siguiente",
+  "last": "Último"
+}

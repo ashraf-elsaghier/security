@@ -1,0 +1,13 @@
+{
+  "drivers_name": "Driver's Name",
+  "plate_number": "Plate Number",
+  "serial_number": "Serial Number",
+  "license_number": "License Number",
+  "history_playback": "History Playback",
+  "show_camera": "Show Camera",
+  "camera": "Camera",
+  "view_playback": "View Playback",
+  "skip_tour": "Skip Tour",
+  "back": "Back",
+  "next": "Next"
+}

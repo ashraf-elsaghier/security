@@ -1,0 +1,26 @@
+body {
+  background-color: blue;
+}
+.wpwl-form-card {
+  border-radius: 10px;
+  background-image: linear-gradient(
+      30deg,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(255, 255, 255, 0.2) 70%
+    ),
+    linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0) 75%,
+      rgba(255, 255, 255, 0.2) 75%
+    ),
+    linear-gradient(
+      60deg,
+      rgba(255, 255, 255, 0) 80%,
+      rgba(255, 255, 255, 0.2) 80%
+    );
+  background-color: red !important;
+}
+
+.mahy {
+  background-color: red !important;
+}

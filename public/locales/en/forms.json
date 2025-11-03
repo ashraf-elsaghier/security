@@ -1,0 +1,45 @@
+{
+    "Add_Maintenance_Plan": "Add Maintenance Plan",
+    "Full_Name": "Full Name",
+    "First_Name":"First name",
+    "Last_Name":"Last Name",
+    "Date_of_Birth":"Date of Birth",
+    "Nationality":"Nationality",
+    "Upload_Image":"Upload Image",
+    "Selected_Vehicle_Plate_Number":"Selected Vehicle Plate Number",
+    "Wasl_Integration":"Wasl Integration (Optional)",
+    "Identity_Number":"Identity Number",
+    "Date_Of_Birth_Hijri":"Date Of Birth Hijri",
+    "Mobile_Number":"Mobile Number",
+    "Name": "Name",
+    "Phone_Number": "Phone Number",
+    "Phone": "Phone",
+    "Email": "Email",
+    "Department": "Department",
+    "Licence_Number": "Licence Number",
+    "Licence_Expiration_Date": "Licence Expiration Date",
+    "RFID": "RFID",
+    "Wasl Integration": "Wasl Integration",
+    "Exist": "Exist",
+    "Non_Exist": "Non Exist",
+    "Add_Driver": "Add Driver",
+    "Car_Wash": "Car Wash",
+    "Bettery_Check": "Bettery Check",
+    "Fixed": "Fixed",
+    "Still": "Still",
+    "By Mileage":"By Mileage",
+    "By Fixed Date":"By Fixed Date",
+    "By Working Hours":"By Working Hours",
+    "Update_Driver_Plan":"Update Driver Plan",
+    "Sign_In":"Sign In"
+
+
+
+
+
+
+
+
+
+
+}

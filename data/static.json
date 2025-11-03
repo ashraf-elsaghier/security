@@ -1,0 +1,811 @@
+[
+  {
+    "reportsData": [
+      {
+        "id": 1,
+        "imgGreen": "/assets/images/icons/history.1.svg",
+        "imgWhite": "/assets/images/icons/history.2.svg",
+        "title": "Utilization_reports_key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "hours_And_Mileage_Daily_Reports",
+            "api": "dashboard/reports/hoursAndMilageDailyReports",
+            "dateStatus": "one",
+            "pagination": false
+          },
+          {
+            "id": 2,
+            "name": "hours_And_Milage_Period_Reports",
+            "api": "dashboard/reports/hoursAndMilagePeriodReports",
+            "dateStatus": "two",
+            "pagination": false
+          },
+          {
+            "id": 4,
+            "name": "trip_Report",
+            "api": "dashboard/reports/tripReport",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 5,
+            "name": "Fuel_Summary_Report_key",
+            "api": "dashboard/reports/fuelSummary",
+            "dateStatus": "two",
+            "pagination": false
+          },
+          {
+            "id": 6,
+            "name": "Driver_Logging_key",
+            "api": "dashboard/reports/driversLog",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 7,
+            "name": "Driving_Statistics_Per_Period_key",
+            "api": "dashboard/reports/drivingStat",
+            "dateStatus": "two",
+            "pagination": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "imgGreen": "/assets/images/icons/map-marked-alt.1.svg",
+        "imgWhite": "/assets/images/icons/map-marked-alt.2.svg",
+        "title": "Geofences_reports_key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "Zone_Activity_key",
+            "api": "dashboard/reports/zoneActivity",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 2,
+            "name": "Geofences_Log_key",
+            "api": "dashboard/reports/geofenceLog",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 3,
+            "name": "Zones_Summary_Activities_key",
+            "api": "dashboard/reports/zonesSummaryActivity",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 4,
+            "name": "Zones_Summary_Activities_Daily_key",
+            "api": "dashboard/reports/zonesSummaryActivityDaily",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 5,
+            "name": "In_Zone_Details_key",
+            "api": "dashboard/reports/zoneDetails",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 6,
+            "name": "In_Zone_Summary_key",
+            "api": "dashboard/reports/zoneSummary",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 7,
+            "name": "non_Contracted_GeoFences_key",
+            "api": "dashboard/reports/nonContractedGeoFences",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 8,
+            "name": "last_vehicle_status_key",
+            "api": "",
+            "dateStatus": "",
+            "pagination": true
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "imgGreen": "/assets/images/icons/sensor.2.svg",
+        "imgWhite": "/assets/images/icons/sensor.3.svg",
+        "title": "Sensors_reports_key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "Weight_Statistics_Report_key",
+            "api": "dashboard/reports/weightStat",
+            "dateStatus": "two",
+            "pagination": false
+          },
+          {
+            "id": 2,
+            "name": "Weight_Detailed_Report_key",
+            "api": "dashboard/reports/weightDetailed",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 3,
+            "name": "Temperature_Summary_Report_key",
+            "api": "dashboard/reports/tempSummary",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 4,
+            "name": "Temperature_Detailed_Report_key",
+            "api": "dashboard/reports/tempDetailed",
+            "dateStatus": "two",
+            "pagination": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "imgGreen": "/assets/images/icons/speedometer-outline.svg",
+        "imgWhite": "/assets/images/icons/speedometer-outline1.svg",
+        "title": "Speeding_reports_key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "Speed_Over_Duration_Report_key",
+            "api": "dashboard/reports/speed",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 2,
+            "name": "Over_Speed_Report_key",
+            "api": "dashboard/reports/overSpeed",
+            "dateStatus": "two",
+            "pagination": false
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "imgGreen": "/assets/images/icons/bell.1.svg",
+        "imgWhite": "/assets/images/icons/bell.2.svg",
+        "title": "Status_reports_key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "Offline_Vehicles_Report_key",
+            "api": "dashboard/reports/offlineVehicles",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 2,
+            "name": "User_Vehicles_key",
+            "api": "dashboard/reports/userVehicles",
+            "pagination": true
+          },
+          {
+            "id": 3,
+            "name": "Vehicle_Idling_and_Parking_Reports_key",
+            "api": "dashboard/reports/vehicleIdling",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 4,
+            "name": "Seat_Belt_Report_Key",
+            "api": "dashboard/reports/statusReport",
+            "dateStatus": "two",
+            "pagination": true
+          },
+          {
+            "id": 5,
+            "name": "Parking_Group_Reports_key",
+            "api": "dashboard/reports/parkingGroups",
+            "pagination": true
+          }
+        ]
+      },
+
+      {
+        "id": 6,
+        "imgGreen": "/assets/images/icons/bell.1.svg",
+        "imgWhite": "/assets/images/icons/bell.2.svg",
+        "title": "Notification_reports_key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "Alarms_and_Notifications_key",
+            "api": "dashboard/reports/alarmsAndNotification",
+            "dateStatus": "two",
+            "pagination": false
+          },
+          {
+            "id": 2,
+            "name": "Ai_Alarm_Key",
+            "api": "dashboard/reports/aiAlarm",
+            "dateStatus": "two",
+            "pagination": false
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "imgGreen": "/assets/images/icons/bell.1.svg",
+        "imgWhite": "/assets/images/icons/bell.2.svg",
+        "title": "Active_Devices_Summary_Key",
+        "subTitle": [
+          {
+            "id": 1,
+            "name": "Active_Devices_Summary_Key",
+            "api": "dashboard/reports/activeAccountsVehiclesSummary",
+            "dateStatus": "one",
+            "pagination": false
+          }
+        ]
+      }
+    ],
+    "dropdownArr": [
+      {
+        "name": "UTILIZATION_REPORTS",
+        "data": [
+          "Working_Hours_and_Mileage_Daily_Basis",
+          "Working_Hours_ And_Mileage_Period",
+          "Custom_Running_Time"
+        ]
+      },
+      {
+        "name": "GEOFENCES_REPORTS",
+        "data": [
+          "Zone_Activity",
+          "Geofences_Log",
+          "Zones_Summary_Activities",
+          "Zones_Summary_Activities_Daily",
+          "In_Zone_Details",
+          "In_Zone_Summary"
+        ]
+      },
+      {
+        "name": "SENSORS_REPORTS",
+        "data": [
+          "Weight_Statistics_Report",
+          "Weight_Detailed_Report",
+          "Temperature_Summary_Report",
+          "Temperature_Detailed_Report"
+        ]
+      },
+      {
+        "name": "SPEEDING_REPORTS",
+        "data": ["Speed_Over_Duration_Report", "Over_Speed_Report"]
+      },
+      {
+        "name": "STATUS_REPORTS",
+        "data": [
+          "Offline_Vehicles_Report",
+          "User_Vehicles",
+          "Vehicle_Idling_and_Parking_Reports"
+        ]
+      },
+      {
+        "name": "NOTIFICATION_REPORTS",
+        "data": ["Alarms_and_Notifications"]
+      }
+    ],
+    "Catalogues": [
+      {
+        "id": "01",
+        "name": "Chicken"
+      },
+      {
+        "id": "02",
+        "name": "Beef"
+      },
+      {
+        "id": "03",
+        "name": "Lamb"
+      },
+      {
+        "id": "04",
+        "name": "Pork"
+      },
+      {
+        "id": "05",
+        "name": "Seafood"
+      },
+      {
+        "id": "06",
+        "name": "Dairy"
+      },
+      {
+        "id": "07",
+        "name": "Tofu"
+      },
+      {
+        "id": "08",
+        "name": "Vegan"
+      }
+    ],
+    "SubScriptionsList": [
+      {
+        "id": 1,
+        "name": "Track - Track",
+        "mainCategory": "Track",
+        "subMainCategory": "Track",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "Track Replay",
+          "Show Live Locations",
+          "Show Land Marks",
+          "Show Traffic",
+          "Edit Vehicle",
+          "Show Geofence",
+          "Calculate Distance",
+          "Group Vehicles",
+          "Locate",
+          "Clear Search",
+          "Full History",
+          "Send Commands",
+          "Enable Vehicle",
+          "Disable Vehicle",
+          "Vehicle Status",
+          "Calibrate Mileage",
+          "Calibrate Working Hours",
+          "Share Location",
+          "Geofence",
+          "Landmark",
+          "Calibrate Weight Setting",
+          "Export Map"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Track - History",
+        "mainCategory": "Track",
+        "subMainCategory": "History",
+        "selectedPermissions": [],
+        "permissions": ["Search"]
+      },
+      {
+        "id": 3,
+        "name": "Track - Alerts and notifications",
+        "mainCategory": "Track",
+        "subMainCategory": "Alerts and notifications",
+        "selectedPermissions": [],
+        "permissions": ["All", "Access", "Reset"]
+      },
+      {
+        "id": 4,
+        "name": "Track - Operate Vehicle",
+        "mainCategory": "Track",
+        "subMainCategory": "Operate Vehicle",
+        "selectedPermissions": [],
+        "permissions": ["Access", "Route"]
+      },
+      {
+        "id": 5,
+        "name": "Manage - Manage Devices",
+        "mainCategory": "Manage",
+        "subMainCategory": "Manage Devices",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "List",
+          "Add",
+          "Add Patch",
+          "Edit",
+          "Delete",
+          "Export",
+          "Transfare Device"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Manage - Manage Drivers",
+        "mainCategory": "Manage",
+        "subMainCategory": "Manage Drivers",
+        "selectedPermissions": [],
+        "permissions": [
+          "Access",
+          "Manage Driving Behavior",
+          "Add",
+          "Edit",
+          "Delete",
+          "Assign Vehicle",
+          "Locate Driver",
+          "List"
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Manage - Preventive Maintenance",
+        "mainCategory": "Manage",
+        "subMainCategory": "Preventive Maintenance",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "List",
+          "Edit",
+          "Delete",
+          "Add",
+          "View History",
+          "Export",
+          "Reset"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Manage - Manage Driving Behavior",
+        "mainCategory": "Manage",
+        "subMainCategory": "Manage Driving Behavior",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 9,
+        "name": "Manage - Used Base Insurance",
+        "mainCategory": "Manage",
+        "subMainCategory": "Used Base Insurance",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 10,
+        "name": "Operate Vehicle - Rental",
+        "mainCategory": "Operate Vehicle",
+        "subMainCategory": "Rental",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 11,
+        "name": "Operate Vehicle - Dispatch",
+        "mainCategory": "Operate Vehicle",
+        "subMainCategory": "Dispatch",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 12,
+        "name": "Operate Vehicle - Task",
+        "mainCategory": "Operate Vehicle",
+        "subMainCategory": "Task",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 13,
+        "name": "Reports - Scheduled",
+        "mainCategory": "Reports",
+        "subMainCategory": "Scheduled",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 14,
+        "name": "Reports - OnDemand",
+        "mainCategory": "Reports",
+        "subMainCategory": "OnDemand",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "Show Report",
+          "Export To Excel",
+          "Export To PDF",
+          "Mileage",
+          "Working Hourse and Mileage Daily Bases",
+          "Working Hourse and Mileage Period",
+          "Custom Running Time",
+          "Trip Report",
+          "Fuel Summery Report",
+          "Driver Logging",
+          "Driving Statistics Per Pirod",
+          "Zone Activity",
+          "Geofence Log",
+          "Zones Summary Activities",
+          "Zones Summary Activities Daily",
+          "Detailed In zone",
+          "Summary In zone",
+          "Weight Statistics Report",
+          "Weight Detailed Report",
+          "Temperature Summary Report",
+          "Temperature Detailed Report",
+          "Speed Over Duration Report",
+          "Over Speed Report",
+          "Over Street Speed Report",
+          "Offline Vehicals Reports",
+          "User Vehicles",
+          "Vehicle Idling and Parking Reports",
+          "Alarms and Notifications"
+        ]
+      },
+      {
+        "id": 15,
+        "name": "Reports - Dashboard",
+        "mainCategory": "Reports",
+        "subMainCategory": "Dashboard",
+        "selectedPermissions": [],
+        "permissions": []
+      },
+      {
+        "id": 16,
+        "name": "Manage - Manage Vehicles",
+        "mainCategory": "Manage",
+        "subMainCategory": "Manage Vehicles",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "List",
+          "Add",
+          "Add Patch",
+          "Edit",
+          "Delete",
+          "Export",
+          "Assign Device"
+        ]
+      },
+      {
+        "id": 17,
+        "name": "Manage - Account Management",
+        "mainCategory": "Manage",
+        "subMainCategory": "Account Management",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "CompleteList",
+          "Incomplete List",
+          "Manage Vehicles",
+          "Manage Users",
+          "Edit",
+          "Active Or Suspend",
+          "Add New Account",
+          "Complete Account",
+          "Subscriptions"
+        ]
+      },
+      {
+        "id": 18,
+        "name": "Manage - Users Management",
+        "mainCategory": "Manage",
+        "subMainCategory": "Users Management",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "Completed List",
+          "Incompleted List",
+          "Add New User",
+          "Edit User Role",
+          "Edit User Info",
+          "Manage Assign Vehicles",
+          "Reset Password",
+          "Complete User"
+        ]
+      },
+      {
+        "id": 19,
+        "name": "Track - Geofences",
+        "mainCategory": "Track",
+        "subMainCategory": "Geofences",
+        "selectedPermissions": [],
+        "permissions": ["All", "Add", "delete", "List"]
+      },
+      {
+        "id": 20,
+        "name": "Track - LandMarks",
+        "mainCategory": "Track",
+        "subMainCategory": "LandMarks",
+        "selectedPermissions": [],
+        "permissions": ["All", "Add", "List", "Delete", "Locate"]
+      },
+      {
+        "id": 21,
+        "name": "Manage - Management",
+        "mainCategory": "Manage",
+        "subMainCategory": "Management",
+        "selectedPermissions": [],
+        "permissions": [
+          "All",
+          "Account Management",
+          "Users Management",
+          "Vehicle Management",
+          "Device Management",
+          "SimCard Management",
+          "Driver Management",
+          "Group Management"
+        ]
+      }
+    ],
+    "subScription": [
+      {
+        "id": 1,
+        "name": "Track",
+        "data": [
+          {
+            "icon": "faMapMarked",
+            "classIco": "bg-soft-success",
+            "title": "Track",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faHistory",
+            "classIco": "bg-soft-success",
+            "title": "History",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faBell",
+            "classIco": "bg-soft-success",
+            "title": "Alerts & Notifactions",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faCar",
+            "classIco": "bg-soft-success",
+            "title": "Operate Vehicle",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faMapMarkerAlt",
+            "classIco": "bg-soft-success",
+            "title": "Geofence",
+            "price": 4.9,
+            "active": "Active"
+          },
+          {
+            "icon": "faMapMarkerAlt",
+            "classIco": "bg-soft-success",
+            "title": "LandMarks",
+            "price": 4.2,
+            "active": "Active"
+          }
+        ],
+        "selectedData": []
+      },
+      {
+        "id": 2,
+        "name": "Manage",
+        "data": [
+          {
+            "icon": "faCogs",
+            "classIco": "bg-soft-info",
+            "title": "Management",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faCar",
+            "classIco": "bg-soft-info",
+            "title": "Manage Vehicle",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faUsers",
+            "classIco": "bg-soft-info",
+            "title": "Accounts Management",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faUsersCog",
+            "classIco": "bg-soft-info",
+            "title": "Users Management",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faCog",
+            "classIco": "bg-soft-info",
+            "title": "Manage Devices",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faUsersCog",
+            "classIco": "bg-soft-info",
+            "title": "Manage Drivers",
+            "price": 4.2,
+            "active": "Active"
+          },
+          {
+            "icon": "faTools",
+            "classIco": "bg-soft-info",
+            "title": "Preventive Maintenace",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faUsersSlash",
+            "classIco": "bg-soft-info",
+            "title": "Manage Driving Behavior",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faCertificate",
+            "classIco": "bg-soft-info",
+            "title": "Used Base Insurance",
+            "price": 5,
+            "active": "Active"
+          }
+        ],
+        "selectedData": []
+      },
+      {
+        "id": 3,
+        "name": "operateVihecle",
+        "data": [
+          {
+            "icon": "faDollarSign",
+            "classIco": "bg-soft-primary",
+            "title": "Rental",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faCar",
+            "classIco": "bg-soft-primary",
+            "title": "Taxi",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faListUl",
+            "classIco": "bg-soft-primary",
+            "title": "Dispatch",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faClipboardList",
+            "classIco": "bg-soft-primary",
+            "title": "Task",
+            "price": 5,
+            "active": "Active"
+          }
+        ],
+        "selectedData": []
+      },
+      {
+        "id": 4,
+        "name": "reports",
+        "data": [
+          {
+            "icon": "faCalendarAlt",
+            "classIco": "bg-soft-warning",
+            "title": "Scheduled",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faClock",
+            "classIco": "bg-soft-warning",
+            "title": "OnDemand",
+            "price": 5,
+            "active": "Active"
+          },
+          {
+            "icon": "faTachometerAlt",
+            "classIco": "bg-soft-warning",
+            "title": "Dashboard",
+            "price": 5,
+            "active": "Active"
+          }
+        ],
+        "selectedData": []
+      }
+    ]
+  }
+]

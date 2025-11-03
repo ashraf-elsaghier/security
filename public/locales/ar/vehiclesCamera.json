@@ -1,0 +1,14 @@
+{
+  "drivers_name": "اسم السائق",
+  "plate_number": "رقم اللوحة",
+  "serial_number": "الرقم المتسلسل",
+  "license_number": "رقم رخصة القيادة",
+  "history_playback": "سجل التشغيل",
+  "show_camera": "اظهار الكاميرا",
+  "camera": "الكاميرا",
+  "view_playback": "عرض التشغيل",
+  "VehicleStatus": "حالة المركبة",
+  "skip_tour": "تخطي الجولة",
+  "back": "الرجوع",
+  "next": "التالي"
+}

@@ -1,0 +1,98 @@
+.bxTitleIcon {
+  flex: 10;
+  gap: 10px;
+}
+
+.ModalBodyTitle {
+  color: #767676;
+}
+
+.icon {
+  width: 13px;
+}
+
+.ReportsTitle {
+  width: 230px;
+  font-size: 10px;
+  i {
+    text-align: right;
+  }
+  span {
+    text-align: left;
+    width: 100%;
+  }
+}
+
+.dateFromBx,
+.dateToBx,
+.Search {
+  position: relative;
+  // border-top: 1px solid #cdcdcd;
+}
+
+.dateFrom {
+  width: 100px;
+  border: 0;
+  font-size: 12px;
+  padding-left: 13px;
+}
+
+.Search {
+  width: 150px;
+  border: 0;
+  font-size: 12px;
+  // height: 1rem;
+  transition: all 1s ease-in-out;
+  background-color: transparent;
+  outline: none;
+  &:focus {
+    // border: 1px solid #0387bb;
+  }
+}
+
+.dateTo {
+  // width: 100px;
+  border: 0;
+  font-size: 12px;
+  padding-left: 13px;
+}
+
+.To {
+  margin-left: 10px;
+}
+
+.From,
+.To {
+  font-size: 12px;
+  line-height: 2.5;
+}
+
+.search {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  input {
+    margin-top: 5px;
+    &::placeholder {
+      color: #c3c3c3;
+    }
+  }
+}
+
+.bxLinks {
+  width: 10px;
+  margin-right: 5px;
+  margin-left: 20px;
+  margin-bottom: 3px;
+  button {
+    gap: 5px;
+  }
+}
+
+.action-buttons { 
+  width: fit-content;
+  display: flex;
+  align-items: end;
+  gap: 5px;
+ 
+  margin-bottom: 13px;
+}

@@ -1,0 +1,25 @@
+# Ignore node_modules since they will be installed inside the Docker container
+node_modules
+npm-debug.log
+
+# Ignore logs and temp files
+logs
+*.log
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.DS_Store
+
+# Ignore Next.js build output and cache
+.next
+out
+.cache
+
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore IDE/editor config files
+.vscode
+.idea
+*.swp

@@ -1,0 +1,141 @@
+// Base class
+//
+// Requires one of the contextual, color modifier classes for `color` and
+// `background-color`.
+
+.badge {
+  display: inline-block;
+  padding: $badge-padding-y $badge-padding-x;
+  @include font-size($badge-font-size);
+  font-weight: $badge-font-weight;
+  line-height: 1;
+  color: $badge-color;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  @include border-radius($badge-border-radius);
+  @include gradient-bg();
+
+  // Empty badges collapse automatically
+  &:empty {
+    display: none;
+  }
+}
+
+// Quick fix for badges in buttons
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+///////////////////////////////////////////////////////
+.MuiStepIcon-root.MuiStepIcon-active {
+  color: #2C7BC6 !important;
+}
+.MuiStepConnector-lineVertical {
+  min-height: 0 !important;
+}
+.MuiPaper-root {
+  background-color: transparent !important;
+}
+//////////////////////////////////////////////////////
+.dropdownH {
+  margin: 0 auto;
+  width: 100%;
+  border: 1px solid #ddd;
+  background-color: #2C7BC6;
+  border-radius: 5px;
+}
+
+.dropdownH__text {
+  color: white;
+  padding: 10px 16px;
+  cursor: pointer;
+  height: auto;
+}
+
+// .dropdownH__text:hover {
+//   color: white;
+//   background: #475154;
+// }
+
+.dropdownH__text:after {
+  content: "";
+  transition: all 0.3s;
+  border: solid #ccc;
+  border-width: 0 1px 1px 0;
+  float: right;
+  margin-top: 8px;
+  margin-right: 6px;
+  padding: 5px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.dropdownH.active .dropdownH__text:after {
+  margin-top: 1px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.dropdownH__items {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0px;
+  transition: max-height 0.6s ease;
+  .dropdownH__items__button {
+    width: 50%;
+    margin: 1rem auto 0.5rem auto;
+    display: flex;
+    justify-content: center;
+    a {
+      width: 75%;
+      text-decoration: none;
+      color: #666;
+      button {
+        width: 100% !important;
+      }
+    }
+  }
+  .dropdownH__items__checkbox {
+    display: flex;
+    justify-content: center;
+    .rs-checkbox label {
+      color: #fff !important;
+    }
+  }
+}
+.rs-picker-menu {
+  // position: absolute;
+  // top: 11.3rem !important;
+  // left: 61.8% !important;
+  border-top-right-radius: 0 !important;
+}
+.rs-picker-has-value .rs-btn .rs-picker-toggle-value,
+.rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
+  color: #666 !important;
+}
+
+.dropdownH.active .dropdownH__items {
+  visibility: visible;
+
+  border-top: 0.5px solid #ddd;
+  height: auto;
+  max-height: 290px;
+  opacity: 1;
+  transition: max-height 0.7s, opacity 3s, visibility 4s ease;
+}
+
+.dropdownH__item {
+  cursor: pointer;
+  padding: 10px 18px;
+}
+
+// .dropdownH__item:not(:last-child) {
+//   border-bottom: 1px solid #666;
+// }
+
+// .dropdownH__item:hover {
+//   color: white;
+//   background: #3a4143;
+// }
