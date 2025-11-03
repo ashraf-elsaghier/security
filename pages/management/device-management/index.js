@@ -41,7 +41,7 @@ const excelData = [
   {
     DeviceType: "",
     Status: "",
-    SerialNumber: "",
+    SerialNumber: ""
   },
 ];
 
@@ -59,7 +59,7 @@ const ManageDevices = () => {
   // bulk
   const [bulkModel, setBulkModel] = useState(false);
   const [bulkLoading, setBulkLoading] = useState(false);
-  const [bulkFile, setBulkFile] = useState(null);
+  const [bulkFile, setBulkFile] = useState(null)
   // assign device to vehicle
   const [assignDeviceModel, setAssignDeviceModel] = useState(false);
   const [assignDeviceObj, setAssignDeviceObj] = useState({});
@@ -202,7 +202,7 @@ const ManageDevices = () => {
     const submitData = {
       ...assignDeviceObj,
       VehicleID: rowSelected.VehicleID,
-      SimID: assignDeviceObj.simID,
+      SimID: assignDeviceObj.simID
     };
     if (submitData.simID) delete submitData.simID;
     setAssignDeviceModelLoading(true);
@@ -246,7 +246,7 @@ const ManageDevices = () => {
   // unassign Sim from device
   const unassignSIMToDevice = async () => {
     const submitData = {
-      deviceId: unassignSIMObj.DeviceID,
+      deviceId: unassignSIMObj.DeviceID
     };
     setUnassignSIMModelLoading(true);
     try {
@@ -255,7 +255,7 @@ const ManageDevices = () => {
       onUnassigndGridReady();
       setUnassignSIMModelLoading(false);
       toast.success(respond.message);
-      setUnassignSIMModel(false);
+      setUnassignSIMModel(false)
     } catch (error) {
       toast.error(error?.response?.data?.message);
       setUnassignSIMModelLoading(false);
@@ -537,8 +537,8 @@ const ManageDevices = () => {
                 onGridReady={onAssigndGridReady}
                 gridApi={assignedGridApi}
                 gridColumnApi={assignedGridColumnApi}
-                onCellMouseOver={(e) =>
-                  (e.event.target.dataset.test = "showActions")
+                onCellMouseOver={
+                  (e) => (e.event?.target?.dataset?.test = "showActions")
                 }
                 onCellMouseOut={HideActions}
               />
@@ -566,7 +566,7 @@ const ManageDevices = () => {
               gridApi={unassignedGridApi}
               gridColumnApi={unassignedGridColumnApi}
               onCellMouseOver={(e) =>
-                (e.event.target.dataset.test = "showActions")
+                (e?.event?.target?.dataset?.test = "showActions")
               }
               onCellMouseOut={HideActions}
             />
@@ -669,7 +669,7 @@ const ManageDevices = () => {
               disabled={unassignDeviceModelLoading}
             >
               <h4 className="text-center">
-                {t("Are You Sure You Want to Unassign This Device?")}
+                {t('Are You Sure You Want to Unassign This Device?')}
               </h4>
             </Model>
 
@@ -705,7 +705,7 @@ const ManageDevices = () => {
               disabled={unassignSIMModelLoading}
             >
               <h4 className="text-center">
-                {t("Are You Sure You Want to Unassign This SIM Card?")}
+                {t('Are You Sure You Want to Unassign This SIM Card?')}
               </h4>
             </Model>
           </Card.Body>
@@ -732,12 +732,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
-        "Management",
-        "main",
-        "Tour",
-        "common",
-      ])),
+      ...(await serverSideTranslations(context.locale, ["Management", "main", "Tour", "common"])),
     },
   };
 }

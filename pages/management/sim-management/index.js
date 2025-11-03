@@ -158,7 +158,7 @@ const SimManagement = () => {
   };
   const unassignSIMToDevice = async () => {
     const submitData = {
-      deviceId: unassignSIMObj.DeviceID,
+      deviceId: unassignSIMObj.DeviceID
     };
     setUnassignSIMModelLoading(true);
     try {
@@ -167,7 +167,7 @@ const SimManagement = () => {
       onUnassigndGridReady();
       setUnassignSIMModelLoading(false);
       toast.success(respond.message);
-      setUnassignSIMModel(false);
+      setUnassignSIMModel(false)
     } catch (error) {
       toast.error(error?.response?.data?.message);
       setUnassignSIMModelLoading(false);
@@ -218,6 +218,7 @@ const SimManagement = () => {
               >
                 | {t("Unassign SimCards")}
               </span>
+
             </div>
           </>
         ),
@@ -256,6 +257,7 @@ const SimManagement = () => {
                   setAssignModalShow(true);
                 }}
                 className="visible"
+
               >
                 {t("Assign to Device")} |
               </span>
@@ -395,7 +397,7 @@ const SimManagement = () => {
                 gridApi={assignedGridApi}
                 gridColumnApi={assignedGridColumnApi}
                 onCellMouseOver={(e) =>
-                  (e.event.target.dataset.test = "showActions")
+                  (e?.event?.target?.dataset?.test = "showActions")
                 }
                 onCellMouseOut={HideActions}
               />
@@ -413,7 +415,7 @@ const SimManagement = () => {
                 gridApi={unassignedGridApi}
                 gridColumnApi={unassignedGridColumnApi}
                 onCellMouseOver={(e) =>
-                  (e.event.target.dataset.test = "showActions")
+                  (e?.event?.target?.dataset?.test = "showActions")
                 }
                 onCellMouseOut={HideActions}
               />
@@ -461,6 +463,7 @@ const SimManagement = () => {
               />
             </Model>
 
+
             {/* unassign SIM from device */}
 
             <Model
@@ -474,9 +477,25 @@ const SimManagement = () => {
               disabled={unassignSIMModelLoading}
             >
               <h4 className="text-center">
-                {t("Are You Sure You Want to Unassign This SIM Card?")}
+                {t('Are You Sure You Want to Unassign This SIM Card?')}
               </h4>
             </Model>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             {/* assign sim Model */}
             <Model
@@ -521,12 +540,7 @@ export async function getServerSideProps(context) {
   }
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
-        "main",
-        "Management",
-        "Tour",
-        "common",
-      ])),
+      ...(await serverSideTranslations(context.locale, ["main", "Management", "Tour", "common"])),
     },
   };
 }
