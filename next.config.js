@@ -156,44 +156,40 @@
 const { i18n } = require("./next-i18next.config");
 
 const isProd = process.env.NODE_ENV === "production";
-const isDev = !isProd;
 
-// ----------------------
-// 1. BASE CSP ARRAYS
-// ----------------------
-let styleSources = [
-  "'self'",
-  "https://fonts.googleapis.com",
-  "https://cdnjs.cloudflare.com",
-  "https://stackpath.bootstrapcdn.com",
-  "https://css.zohocdn.com", // Fix for Zoho fonts/styles
-];
-
-let scriptSources = [
+// 🔐 CSP Arrays
+const scriptSources = [
   "'self'",
   "https://*.googleapis.com",
   "https://*.google.com",
   "https://www.googletagmanager.com",
-  "https://www.clarity.ms", // For Microsoft Clarity
-  "https://www.googletagmanager.com",
-  "https://salesiq.zoho.com", // For Zoho widget scripts
-  "https://js.zohocdn.com", // Zoho embed scripts
+  "https://www.google-analytics.com",
+  "https://www.clarity.ms",
+  "https://salesiq.zoho.com",
+  "https://js.zohocdn.com",
 ];
 
-let connectSources = [
+const styleSources = [
+  "'self'",
+  "https://fonts.googleapis.com",
+  "https://stackpath.bootstrapcdn.com",
+  "https://css.zohocdn.com",
+];
+
+const connectSources = [
   "'self'",
   "https://api.fms.mobily.saferoad.net",
   "wss://socketio.fms.mobily.saferoad.net",
   "https://www.google-analytics.com",
+  "https://region1.google-analytics.com",
   "https://*.googleapis.com",
   "https://*.google.com",
-  "https://region1.google-analytics.com",
   "https://www.clarity.ms",
   "https://*.zohocdn.com",
   "https://salesiq.zoho.com",
 ];
 
-let imageSources = [
+const imageSources = [
   "'self'",
   "data:",
   "blob:",
@@ -202,36 +198,25 @@ let imageSources = [
   "https://*.gstatic.com",
   "https://www.google.com",
   "https://www.clarity.ms",
-  "https://css.zohocdn.com",
   "https://img.zohocdn.com",
 ];
 
-let fontSources = [
+const fontSources = [
   "'self'",
   "data:",
   "https://fonts.gstatic.com",
-  "https://cdnjs.cloudflare.com",
-  "https://stackpath.bootstrapcdn.com",
   "https://css.zohocdn.com",
 ];
 
-// ----------------------
-// 2. DEV MODE RELAXATION
-// ----------------------
-if (isDev) {
-  scriptSources.push("'unsafe-eval'", "'unsafe-inline'");
-  styleSources.push("'unsafe-inline'");
-  connectSources.push("http:", "ws:");
-  imageSources.push("http:");
-} else {
-  // In production, add Clarity nonce or hash if inline script needed
-  // e.g. if you inject Clarity or GTM inline in _document.js, use a nonce
-  // (nonce generation shown below)
-}
+// ✅ Only allow unsafe-inline in development
+// if (!isProd) {
+scriptSources.push("'unsafe-eval'", "'unsafe-inline'");
+styleSources.push("'unsafe-inline'");
+connectSources.push("http:", "ws:");
+imageSources.push("http:");
+// }
 
-// ----------------------
-// 3. CSP STRING BUILD
-// ----------------------
+// ✅ Final CSP
 const csp = `
   default-src 'self';
   base-uri 'self';
@@ -242,67 +227,36 @@ const csp = `
 
   script-src ${scriptSources.join(" ")};
   style-src ${styleSources.join(" ")};
-  style-src-elem ${styleSources.join(" ")};
   img-src ${imageSources.join(" ")};
   connect-src ${connectSources.join(" ")};
   font-src ${fontSources.join(" ")};
-  frame-src 'self' https://*.google.com https://*.zohocdn.com https://salesiq.zoho.com;
+  frame-src 'self' https://*.google.com https://salesiq.zoho.com;
   worker-src 'self' blob:;
   child-src 'self' blob:;
 `;
 
-const cspValue = csp.replace(/\s+/g, " ").trim();
-
-// ----------------------
-// 4. SECURITY HEADERS
-// ----------------------
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: cspValue,
+    value: csp.replace(/\s+/g, " ").trim(),
   },
-  {
-    key: "X-Frame-Options",
-    value: "DENY",
-  },
-  {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
-  },
-  {
-    key: "Referrer-Policy",
-    value: "strict-origin-when-cross-origin",
-  },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
-  {
-    key: "Cross-Origin-Resource-Policy",
-    value: "same-origin",
-  },
-  {
-    key: "Cross-Origin-Opener-Policy",
-    value: "same-origin",
-  },
-  {
-    key: "Cross-Origin-Embedder-Policy",
-    value: "require-corp",
-  },
+  { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+  { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
 ];
 
-// ----------------------
-// 5. EXPORT CONFIG
-// ----------------------
 const nextConfig = {
   reactStrictMode: true,
   i18n,
-  swcMinify: false,
-  keySeparator: ".",
-  returnEmptyString: false,
-  reloadOnPrerender: isDev,
+  swcMinify: true,
   poweredByHeader: false,
-
   async headers() {
     return [
       {
