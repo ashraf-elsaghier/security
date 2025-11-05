@@ -154,7 +154,6 @@
 // module.exports = nextConfig;
 
 // next.config.js
-
 /** @type {import('next').NextConfig} */
 const { i18n } = require("./next-i18next.config");
 
@@ -163,8 +162,6 @@ const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
 
 // --- 2. CSP SOURCE ARRAYS ---
-
-// Note: Ensure all necessary domains for styles are listed here.
 let styleSources = [
   "'self'",
   "https://fonts.googleapis.com",
@@ -172,7 +169,6 @@ let styleSources = [
   "https://stackpath.bootstrapcdn.com",
 ];
 
-// Note: Ensure all domains for scripts (GTM, analytics, etc.) are listed here.
 let scriptSources = [
   "'self'",
   "https://*.googleapis.com",
@@ -180,7 +176,6 @@ let scriptSources = [
   "https://www.googletagmanager.com",
 ];
 
-// Note: Ensure all domains for fetch/websocket requests are listed here.
 let connectSources = [
   "'self'",
   "https://api.fms.mobily.saferoad.net",
@@ -190,36 +185,33 @@ let connectSources = [
   "https://*.google.com",
 ];
 
-// Note: Ensure all domains for images, SVGs, and data URIs are listed here.
 let imageSources = [
   "'self'",
-  "data:", // Allows data URIs (often used for small icons/images)
-  "blob:", // Allows blob URLs
+  "data:",
+  "blob:",
   "https://res.cloudinary.com",
   "https://*.googleapis.com",
   "https://*.gstatic.com",
 ];
 
-// Note: Ensure all domains for custom fonts and icon fonts are listed here.
 let fontSources = [
   "'self'",
-  "data:", // Allows font data URIs
+  "data:",
   "https://fonts.gstatic.com",
   "https://cdnjs.cloudflare.com",
   "https://stackpath.bootstrapcdn.com",
 ];
 
 // --- 3. CONDITIONAL ADDITIONS FOR DEVELOPMENT (CSP FIXES) ---
+// These INSECURE directives are ONLY added for local development.
 if (isDev) {
   // FIX for: "Refused to apply inline style"
-  // WARNING: This is INSECURE for production. Use Nonce/Hash for production.
   styleSources.push("'unsafe-inline'");
 
   // FIX for: "Refused to execute inline script"
-  // WARNING: This is INSECURE for production. Use Nonce/Hash for production.
   scriptSources.push("'unsafe-inline'");
 
-  // FIX for: "Uncaught EvalError: Refused to evaluate a string as JavaScript" (often for sourcemaps)
+  // FIX for: "Uncaught EvalError: Refused to evaluate a string as JavaScript"
   scriptSources.push("'unsafe-eval'");
 
   // Allow HTTP/WS connections in development
@@ -229,6 +221,9 @@ if (isDev) {
 }
 
 // --- 4. BUILD THE FINAL CSP STRING ---
+// NOTE: If issues persist in PRODUCTION, you need to add specific domains
+// that are being blocked, or use a secure Nonce/Hash solution
+// to replace the development-only 'unsafe-inline' and 'unsafe-eval'.
 const csp = `
     default-src 'self';
     object-src 'none';
@@ -261,11 +256,11 @@ const securityHeaders = [
   },
   {
     key: "X-Frame-Options",
-    value: "DENY", // Prevents clickjacking by blocking framing
+    value: "DENY",
   },
   {
     key: "X-Content-Type-Options",
-    value: "nosniff", // Prevents browser from 'sniffing' content type
+    value: "nosniff",
   },
   {
     key: "Referrer-Policy",
@@ -273,12 +268,11 @@ const securityHeaders = [
   },
   {
     key: "X-XSS-Protection",
-    value: "1; mode=block", // Basic XSS protection (though CSP is better)
+    value: "1; mode=block",
   },
-  // Removed 'X-Powered-By' header by setting 'poweredByHeader: false' below
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()", // Denies access to sensitive APIs
+    value: "camera=(), microphone=(), geolocation=()",
   },
 ];
 
@@ -286,11 +280,11 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   i18n,
-  swcMinify: false, // You might want to remove this or set to true for better performance
+  swcMinify: false, // Consider setting to true for better production performance
   keySeparator: ".",
   returnEmptyString: false,
   reloadOnPrerender: isDev,
-  poweredByHeader: false, // Recommended security practice to hide Next.js
+  poweredByHeader: false, // Security: Hide Next.js
 
   // Headers function to apply the security headers to all routes
   async headers() {
