@@ -14,7 +14,7 @@ import { getSession } from "next-auth/client";
 import SupportHeader from "components/support-representative/SupportHeader";
 import axios from "axios";
 import { toast } from "react-toastify";
-// import { popupData } from "components/maps/Resources";
+import { popupData } from "components/maps/Resources";
 import { useSelector } from "react-redux";
 import PopupActions from "components/support-representative/PopupActions";
 import Spinner from "components/UI/Spinner";
@@ -25,9 +25,6 @@ const TrackMap = dynamic(
   () => import("components/support-representative/TrackMap"),
   { ssr: false }
 );
-const popupData = dynamic(() => import("components/maps/Resources"), {
-  ssr: false,
-});
 const ReportsContent = dynamic(
   () => import("components/history/ReportsContent"),
   { ssr: false }

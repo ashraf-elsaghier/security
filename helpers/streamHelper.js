@@ -7,7 +7,7 @@ import {
   isDateExpired,
 } from "../helpers/helpers";
 import dynamic from "next/dynamic";
-import moment from "moment";
+import moment from "moment"
 
 const { Mapjs } = dynamic(() => import("../components/maps/leafletchild"), {
   ssr: false,
@@ -23,23 +23,25 @@ const StreamHelper = () => {
     }, {});
   };
   const CalcVehTotal = (FullVehData) => {
+    
     const statusGroups = groupBykey(FullVehData, "VehicleStatus");
-    const totalDrivers = FullVehData.filter((v) => v["DriverID"])?.length ?? 0;
+    const totalDrivers =
+      FullVehData.filter((v) => v["DriverID"])?.length ?? 0;
     const VehTotal = {
       totalVehs: FullVehData.length,
       activeVehs:
         FullVehData.length -
         (statusGroups[5]?.length || 0 + statusGroups[600]?.length || 0),
       offlineVehs:
-        (statusGroups[5]?.length || 0) + (statusGroups[600]?.length || 0),
-      SleepingVehs: statusGroups[204]?.length || 0, //
+        (statusGroups[5]?.length || 0) + (statusGroups[600]?.length || 0), 
+         SleepingVehs:
+        statusGroups[204]?.length || 0, //
       idlingVehs: statusGroups[2]?.length ?? 0, //
       RunningVehs: statusGroups[1]?.length ?? 0, //
       stoppedVehs: statusGroups[0]?.length ?? 0, //
       ospeedVehs: statusGroups[101]?.length ?? 0, //
       osspeedVehs: statusGroups[100]?.length ?? 0, //
-      invalidVehs:
-        (statusGroups[203]?.length || 0) + (statusGroups[201]?.length || 0),
+      invalidVehs: (statusGroups[203]?.length || 0) + (statusGroups[201]?.length || 0), 
 
       totalDrivers: totalDrivers,
       activeDrivers:
@@ -48,22 +50,22 @@ const StreamHelper = () => {
     };
     return VehTotal;
   };
-  const isBefore = (date1, date2) => {
+  const  isBefore=(date1, date2) =>{
     return new Date(date1) <= new Date(date2);
-  };
-
+  }
+  
   const holdStatus = [600, 5, 0, 2];
   const CalcMileage = (Mileage) => (Mileage ? Mileage.toFixed(2) : 0);
   const CalcDuration = (newInfo, oldInfo) => {
-    return moment().diff(moment(oldInfo?.lastTrips ?? newInfo?.lastTrips));
+        return moment().diff(moment(oldInfo?.lastTrips ?? newInfo?.lastTrips));
   };
   const calcTimeDiff = (date) => {
-    let a = new Date(moment(date).parseZone().utc());
-    let b = new Date();
-    let c = b.getTime() - a.getTime();
+    let a = new Date(moment(date).parseZone().utc())
+    let b = new Date()
+    let c = b.getTime() - a.getTime()
     const hours = c / (1000 * 60 * 60);
     return hours;
-  };
+  }
 
   const CalcDistance = (newInfo, oldInfo) =>
     parseFloat(
@@ -74,111 +76,113 @@ const StreamHelper = () => {
       )
     );
   const aggregate = (newInfo, oldInfo) => {
-    newInfo.SpeedLimit = oldInfo?.SpeedLimit;
+    newInfo?.SpeedLimit = oldInfo?.SpeedLimit;
     newInfo.VehicleStatus = CalcVstatus(newInfo);
     newInfo.WeightReading = WeightVoltToKG(newInfo, oldInfo);
-    if (oldInfo != null) {
-      if (
-        !Mapjs?.helpers?.isValidAddress(newInfo.Address) &&
-        Mapjs?.helpers?.isValidAddress(oldInfo.Address)
-      )
-        newInfo.Address = oldInfo.Address;
-    }
-
-    const keysToCheck = [
-      "RPM",
-      "CoolantTemp",
-      "TotalMileage",
-      "FuelLevelLite",
-      "FuelLevelPer",
-      "FuelPressure",
-      "HybridVoltage",
-    ];
-
-    keysToCheck.forEach((key) => {
-      if (
-        newInfo?.[key] === undefined ||
-        newInfo?.[key] === null ||
-        newInfo?.[key] === 0
-      ) {
-        if (oldInfo?.[key] !== undefined) {
-          newInfo[key] = oldInfo[key];
-        }
+      if (oldInfo != null) {
+        if (
+          !Mapjs?.helpers?.isValidAddress(newInfo.Address) &&
+          Mapjs?.helpers?.isValidAddress(oldInfo.Address)
+        )
+          newInfo.Address = oldInfo.Address;
       }
-    });
-
-    const updatedData = { ...oldInfo, ...newInfo };
-    delete updatedData.duration;
-    return updatedData;
-  };
+    
+      const keysToCheck = [
+        "RPM",
+        "CoolantTemp",
+        "TotalMileage",
+        "FuelLevelLite",
+        "FuelLevelPer",
+        "FuelPressure",
+        "HybridVoltage",
+      ];
+      
+      keysToCheck.forEach((key) => {
+        if (
+          newInfo?.[key] === undefined || 
+          newInfo?.[key] === null || 
+          newInfo?.[key] === 0
+        ) {
+          if (oldInfo?.[key] !== undefined) {
+            newInfo[key] = oldInfo[key];
+          }
+        }
+      });
+    
+      const updatedData = { ...oldInfo, ...newInfo };
+      delete updatedData.duration;
+      return updatedData;
+    };
+    
 
   const CalcVstatus = (newInfo) => {
-    var Status = 5;
+  var Status = 5;
 
-    var duration = calcTimeDiff(newInfo.RecordDateTime);
-
-    if (newInfo.SerialNumber?.startsWith("NoSerial")) {
-      return (Status = 501);
-    } else if (!newInfo.Longitude && !newInfo.Latitude) {
-      return (Status = 500);
-    } else if (
-      (!newInfo.EngineStatus && duration > 48) ||
-      (newInfo.EngineStatus && duration > 12)
-    ) {
-      return (Status = 5);
+  var duration = calcTimeDiff(newInfo.RecordDateTime);
+  
+  if (newInfo.SerialNumber?.startsWith("NoSerial")) {
+  return  Status = 501;
+  } 
+  else if (!newInfo.Longitude && !newInfo.Latitude) {
+  return  Status = 500
+  } 
+  else  if ((!newInfo.EngineStatus && duration > 48) || (newInfo.EngineStatus && duration > 12)){
+     return Status = 5
     }
     // sleep mode
-    else if (
-      newInfo.Satellites === 0 &&
-      newInfo.DevConfig === "device: astro900"
-    ) {
+   else if (newInfo.Satellites === 0 && newInfo.DevConfig === 'device: astro900') {
       return 201;
-    } else if (!newInfo.EngineStatus && duration < 48 && duration > 4) {
-      return (Status = 204);
     }
+    else if(!newInfo.EngineStatus && duration < 48 &&  duration > 4 ){
+     return Status = 204
+  }
 
-    // check feul cutoff
-    else if (newInfo.IsFuelCutOff == true || newInfo.IsFuelCutOff == 1) {
-      return (Status = 203);
-    }
-    // check poweroff
-    else if (
-      newInfo.IsPowerCutOff ||
-      (!newInfo.EngineStatus && newInfo.Speed > 0) ||
-      newInfo.IsFuelCutOff == true ||
-      newInfo.IsFuelCutOff == 1
-    ) {
-      return (Status = 201);
-    }
 
-    // check running
-    else if (newInfo.EngineStatus == 1 && newInfo.Speed <= 5) {
-      return (Status = 2);
-    }
+      // check feul cutoff 
+  else if (newInfo.IsFuelCutOff == true || newInfo.IsFuelCutOff == 1 ) {
+  return  Status = 203;
+  } 
+  // check poweroff
+    else if (newInfo.IsPowerCutOff ||  (!newInfo.EngineStatus && newInfo.Speed > 0) || newInfo.IsFuelCutOff == true || newInfo.IsFuelCutOff == 1) {
+   return Status = 201;
+  } 
 
-    // check overspeed
-    else if (newInfo.EngineStatus == 1 && newInfo.Speed > newInfo.SpeedLimit) {
-      return (Status = 101);
-    } else if (
-      newInfo.EngineStatus == 1 &&
-      newInfo.Speed <= newInfo.SpeedLimit &&
-      newInfo.Speed > 5
-    ) {
-      return (Status = 1);
-    } else if (!newInfo.EngineStatus && newInfo.Speed > 0) {
-      return (Status = 300);
-    } else if (!newInfo.EngineStatus && duration < 4) {
-      return (Status = 0);
-    }
-    return Status;
-  };
+  // check running
+  else if (newInfo.EngineStatus == 1 && newInfo.Speed <= 5) {
+  return  Status = 2;
+  } 
+
+  // check overspeed
+  else if (
+    newInfo.EngineStatus == 1 &&
+    newInfo.Speed > newInfo.SpeedLimit
+  ) {
+  return  Status = 101;
+  }
+  else if (
+    newInfo.EngineStatus == 1 &&
+    newInfo.Speed <= newInfo.SpeedLimit &&
+    newInfo.Speed > 5
+  ) {
+   return Status = 1;
+  }
+  else if (!newInfo.EngineStatus && newInfo.Speed > 0) {
+   return Status = 300;
+  } 
+
+
+  else if (!newInfo.EngineStatus &&  duration < 4) {
+  return  Status = 0;
+  }
+  return Status;
+};
 
   const tolocInfo = function (_message, config = false) {
     var data = _message.val();
     var _locInfo = Object.assign({}, config ? locConfigModel : locDataModel);
 
     //let {DeviceTypeID,DeviceType: _, ...transdata} = data;
-    if (!config) delete data["DeviceTypeID"];
+    if(!config) delete data['DeviceTypeID'];
     return Object.assign(_locInfo, data);
   };
   const objTolocInfo = function (data, config = false) {
@@ -218,7 +222,7 @@ const StreamHelper = () => {
     // aggregate( _newInfo, _oldInfo, _initial);
     if (_oldInfo?.lastTrip != null) {
       // do update by setLocalStorage
-      let lastTrip = [...JSON.parse(JSON.stringify(_oldInfo))?.lastTrip];
+      let lastTrip = [...JSON.parse(JSON.stringify(_oldInfo))?.lastTrip]
       if (
         (_newInfo?.EngineStatus && _oldInfo?.lastTrip[0]) ||
         (!_newInfo?.EngineStatus && !_oldInfo?.lastTrip[0])
@@ -228,22 +232,18 @@ const StreamHelper = () => {
         lastTrip[0] = _newInfo.EngineStatus;
         lastTrip[1] = new Date(_newInfo.RecordDateTime);
       }
-      _oldInfo.lastTrip = lastTrip;
+      _oldInfo?.lastTrip = lastTrip
       // _oldInfo = { ..._oldInfoCopy };
     }
-
+    
+    
+    
     Object.assign(_oldInfo, _newInfo); //_oldInfo = { ..._oldInfo, ...locInfo };//join fix and updated data
     return { locInfo: _oldInfo, updated: true };
   };
   const checkNewOfflines = (VehFullData) => {
-    var newOfflines = VehFullData?.filter(
-      (x) => x?.VehicleStatus != 5 && x?.VehicleStatus != 600
-    ).map((x) => {
-      return { ...x, VehicleStatus: CalcVstatus(x) };
-    });
-    return newOfflines.filter(
-      (x) => x?.VehicleStatus == 5 || x?.VehicleStatus == 600
-    );
+    var newOfflines = VehFullData?.filter(x => x?.VehicleStatus != 5 && x?.VehicleStatus != 600).map(x => { return {...x, VehicleStatus: CalcVstatus(x)};});
+    return newOfflines.filter(x => x?.VehicleStatus == 5 || x?.VehicleStatus == 600);
   };
 
   return {
@@ -257,7 +257,7 @@ const StreamHelper = () => {
     aggregate,
     CalcVstatus,
     tolocInfo,
-    objTolocInfo,
+    objTolocInfo,  
     fbtolocInfo,
     checkNewOfflines,
   };

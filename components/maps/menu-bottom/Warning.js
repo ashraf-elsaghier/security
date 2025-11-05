@@ -177,7 +177,7 @@ const Warning = ({
         columnDefs={columns}
         rowData={Data_table}
         rowSelection={"multiple"}
-        onCellMouseOver={(e) => (e.event.target.dataset.test = "showActions")}
+        onCellMouseOver={(e) => (e?.event?.target?.dataset?.test = "showActions")}
         onCellMouseOut={HideActions}
         paginationNumberFormatter={function (params) {
           return params.value.toLocaleString();

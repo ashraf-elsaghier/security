@@ -44,7 +44,7 @@ const CurrentActiveReportOptions = (props) => {
 
   useEffect(() => {
     if (props.treeData?.length) {
-      setTreeData(props.treeData);
+      setTreeData(props.treeData)
     }
   }, [props.treeData]);
 
@@ -52,7 +52,7 @@ const CurrentActiveReportOptions = (props) => {
     if (props.activeIndex !== -1) {
       props.setFullSelectedReportData((prev) => {
         const old = prev;
-        old.data[props.activeIndex].vehChecked = props.vehChecked;
+        old.data[props.activeIndex]?.vehChecked = props.vehChecked;
         return old;
       });
     }
@@ -103,7 +103,7 @@ const CurrentActiveReportOptions = (props) => {
       const filteredVeh = props.reportsDataSelected.data.filter(
         (e) =>
           e.DisplayName.replace(/\s/g, "").toLocaleLowerCase() ==
-            search.replace(/\s/g, "").toLocaleLowerCase() ||
+          search.replace(/\s/g, "").toLocaleLowerCase() ||
           e.SerialNumber.toLocaleLowerCase() == search.toLocaleLowerCase()
       );
 
@@ -116,22 +116,20 @@ const CurrentActiveReportOptions = (props) => {
     // setTreeFilter(e.target.value.toLocaleLowerCase());
     e.target.value
       ? setTreeData(
-          props.treeData.filter((item) => {
-            const filterDisplayName = item.DisplayName?.toString()
-              .toLocaleLowerCase()
-              .replaceAll(" ", "")
-              .includes(e.target.value.toLocaleLowerCase().replaceAll(" ", ""));
-            const filterSerialNumber =
-              item.SerialNumber?.replaceAll(" ", "")?.includes(
-                e.target.value.toLocaleLowerCase().replaceAll(" ", "")
-              ) ||
-              item.Serial?.replaceAll(" ", "")?.includes(
-                e.target.value.toLocaleLowerCase().replaceAll(" ", "")
-              );
-            return filterDisplayName || filterSerialNumber;
-          })
-        )
-      : setTreeData(props.treeData);
+        props.treeData.filter((item) => {
+          const filterDisplayName = item.DisplayName?.toString()
+            .toLocaleLowerCase()
+            .replaceAll(" ", "")
+            .includes(e.target.value.toLocaleLowerCase().replaceAll(" ", ""));
+          const filterSerialNumber =
+            item.SerialNumber?.replaceAll(" ", "")?.includes(
+              e.target.value.toLocaleLowerCase().replaceAll(" ", "")
+            ) ||
+            item.Serial?.replaceAll(" ", "")?.includes(
+              e.target.value.toLocaleLowerCase().replaceAll(" ", "")
+            );
+          return filterDisplayName || filterSerialNumber;
+        })) : setTreeData(props.treeData);
   };
 
   const handleSelectedVecs = () => props.setShow((prev) => !prev);
@@ -169,25 +167,23 @@ const CurrentActiveReportOptions = (props) => {
     setTreeFilter(e.target.value.toLocaleLowerCase());
     e.target.value
       ? setTreeData(
-          [
-            props.treeData.filter((item) => {
-              const filterDisplayName = item.DisplayName?.toString()
-                .toLocaleLowerCase()
-                .replaceAll(" ", "")
-                .includes(
-                  e.target.value.toLocaleLowerCase().replaceAll(" ", "")
-                );
-              const filterSerialNumber =
-                item.SerialNumber?.replaceAll(" ", "")?.includes(
-                  e.target.value.toLocaleLowerCase().replaceAll(" ", "")
-                ) ||
-                item.Serial?.replaceAll(" ", "")?.includes(
-                  e.target.value.toLocaleLowerCase().replaceAll(" ", "")
-                );
-              return filterDisplayName || filterSerialNumber;
-            }),
-          ].flat()
-        )
+        [
+          props.treeData.filter((item) => {
+            const filterDisplayName = item.DisplayName?.toString()
+              .toLocaleLowerCase()
+              .replaceAll(" ", "")
+              .includes(e.target.value.toLocaleLowerCase().replaceAll(" ", ""));
+            const filterSerialNumber =
+              item.SerialNumber?.replaceAll(" ", "")?.includes(
+                e.target.value.toLocaleLowerCase().replaceAll(" ", "")
+              ) ||
+              item.Serial?.replaceAll(" ", "")?.includes(
+                e.target.value.toLocaleLowerCase().replaceAll(" ", "")
+              );
+            return filterDisplayName || filterSerialNumber;
+          }),
+        ].flat()
+      )
       : setTreeData(props.treeData);
   };
 
@@ -272,8 +268,8 @@ const CurrentActiveReportOptions = (props) => {
         backgroundColor: darkMode
           ? "#222738"
           : isDisabled
-          ? "#e9ecef"
-          : "#FFFFFF",
+            ? "#e9ecef"
+            : "#FFFFFF",
         borderColor: "#0E6395",
         boxShadow: "none",
         "&:hover": {
@@ -282,13 +278,13 @@ const CurrentActiveReportOptions = (props) => {
         },
         ...(isDisabled
           ? {
-              pointerEvents: "auto",
-              cursor: "not-allowed",
-            }
+            pointerEvents: "auto",
+            cursor: "not-allowed",
+          }
           : {
-              pointerEvents: "auto",
-              cursor: "pointer",
-            }),
+            pointerEvents: "auto",
+            cursor: "pointer",
+          }),
       };
     },
     option: (styles, { isDisabled, isSelected, isFocused }) => {
@@ -325,16 +321,15 @@ const CurrentActiveReportOptions = (props) => {
 
   const paginationHandleChange = (e) => {
     props.gridApi.paginationSetPageSize(e.value);
-    props.setPaginationSize(e.value);
-  };
-  const paginationsOptions = useMemo(
-    () => [
-      { value: 10, label: 10 },
-      { value: 20, label: 20 },
-      { value: 30, label: 30 },
-      { value: 40, label: 40 },
-      { value: 50, label: 50 },
-    ],
+    props.setPaginationSize(e.value)
+  }
+  const paginationsOptions = useMemo(() => [
+    { value: 10, label: 10 },
+    { value: 20, label: 20 },
+    { value: 30, label: 30 },
+    { value: 40, label: 40 },
+    { value: 50, label: 50 }
+  ],
     [props.paginationSize]
   );
 
@@ -357,42 +352,42 @@ const CurrentActiveReportOptions = (props) => {
                   onOk={(e) => handleDateTwoInput(e)}
                   value={
                     props.reportsDataSelected.startDate &&
-                    props.reportsDataSelected.endDate
+                      props.reportsDataSelected.endDate
                       ? handleDateRangePickerValue(
-                          props.reportsDataSelected.startDate,
-                          props.reportsDataSelected.endDate
-                        )
+                        props.reportsDataSelected.startDate,
+                        props.reportsDataSelected.endDate
+                      )
                       : [
+                        new Date(
                           new Date(
-                            new Date(
-                              new Date(new Date().setSeconds("00")).setMinutes(
-                                "00"
-                              )
-                            ).setHours("00")
-                          ),
-                          new Date(),
-                        ]
+                            new Date(new Date().setSeconds("00")).setMinutes(
+                              "00"
+                            )
+                          ).setHours("00")
+                        ),
+                        new Date(),
+                      ]
                   }
                   placeholder={t("Select_Date_Range_key")}
                   shouldDisableDate={afterToday()}
                   ranges={predefinedBottomRanges}
                   defaultValue={
                     props.fullSelectedReportData.startDate &&
-                    props.fullSelectedReportData.endDate
+                      props.fullSelectedReportData.endDate
                       ? handleDateRangePickerValue(
-                          props.fullSelectedReportData.startDate,
-                          props.fullSelectedReportData.endDate
-                        )
+                        props.fullSelectedReportData.startDate,
+                        props.fullSelectedReportData.endDate
+                      )
                       : [
+                        new Date(
                           new Date(
-                            new Date(
-                              new Date(new Date().setSeconds("00")).setMinutes(
-                                "00"
-                              )
-                            ).setHours("00")
-                          ),
-                          new Date(),
-                        ]
+                            new Date(new Date().setSeconds("00")).setMinutes(
+                              "00"
+                            )
+                          ).setHours("00")
+                        ),
+                        new Date(),
+                      ]
                   }
                   locale={{
                     sunday: t("Su"),
@@ -440,13 +435,13 @@ const CurrentActiveReportOptions = (props) => {
                 value={
                   Array.isArray(props?.reportsDataSelected?.endDate)
                     ? handleDatePickerValue(
-                        props.reportsDataSelected.endDate[0]
-                      )
+                      props.reportsDataSelected.endDate[0]
+                    )
                     : new Date(
-                        new Date(
-                          new Date(new Date().setSeconds("00")).setMinutes("00")
-                        ).setHours("00")
-                      )
+                      new Date(
+                        new Date(new Date().setSeconds("00")).setMinutes("00")
+                      ).setHours("00")
+                    )
                 }
                 onChangeCalendarDate={(e) => {
                   handleDateOneInput(e);
@@ -456,13 +451,13 @@ const CurrentActiveReportOptions = (props) => {
                 defaultValue={
                   Array.isArray(props?.fullSelectedReportData?.endDate)
                     ? handleDatePickerValue(
-                        props.fullSelectedReportData.endDate[0]
-                      )
+                      props.fullSelectedReportData.endDate[0]
+                    )
                     : new Date(
-                        new Date(
-                          new Date(new Date().setSeconds("00")).setMinutes("00")
-                        ).setHours("00")
-                      )
+                      new Date(
+                        new Date(new Date().setSeconds("00")).setMinutes("00")
+                      ).setHours("00")
+                    )
                 }
                 locale={{
                   sunday: t("Su"),
@@ -522,18 +517,20 @@ const CurrentActiveReportOptions = (props) => {
             className="mb-3 d-flex flex-column w-100"
             controlId="exampleForm.ControlInput1"
           >
-            <Form.Label className="order-1">{t("Rows_per_Page")}</Form.Label>
-            <Select
-              defaultValue={props.paginationSize}
+            <Form.Label className="order-1">
+              {t("Rows_per_Page")}
+            </Form.Label>
+          <Select
+            defaultValue={props.paginationSize}
               placeholder={props.paginationSize}
-              name="paginationSize"
-              options={paginationsOptions}
-              onChange={paginationHandleChange}
-              isSearchable={false}
-              classNamePrefix="select"
+            name="paginationSize"
+            options={paginationsOptions}
+            onChange={paginationHandleChange}
+            isSearchable={false}
+            classNamePrefix="select"
               className="order-2 w-100"
-              styles={colorStyles}
-            />
+            styles={colorStyles}
+          />
           </Form.Group>
         </Col>
 

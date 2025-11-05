@@ -33,8 +33,8 @@ const ShowWarnings = ({
   const warning = {
     6: "power cut off",
     8: "Power From internal Battery",
-  };
-  //
+  }
+  // 
 
   //first page to render in the AG grid table
   const onFirstDataRendered = (params) => params.api.paginationGoToPage(0);
@@ -107,7 +107,7 @@ const ShowWarnings = ({
       {
         headerName: `${t("Type")}`,
         field: "AlarmType",
-        valueGetter: (param) => t(param.data.AlarmType),
+        valueGetter: (param) => t(param.data.AlarmType)
       },
     ],
     [t]
@@ -200,7 +200,7 @@ const ShowWarnings = ({
         columnDefs={columns}
         rowData={loading ? t("loading") : Data_table}
         rowSelection={"multiple"}
-        onCellMouseOver={(e) => (e.event.target.dataset.test = "showActions")}
+        onCellMouseOver={(e) => (e?.event?.target?.dataset?.test = "showActions")}
         onCellMouseOut={HideActions}
         paginationNumberFormatter={function (params) {
           return params.value.toLocaleString();
@@ -216,6 +216,7 @@ const ShowWarnings = ({
         gridApi={gridApi}
         gridColumnApi={gridColumnApi}
         paginationPageSize={20}
+
       />
     </div>
   );
