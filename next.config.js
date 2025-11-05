@@ -431,9 +431,14 @@ const { i18n } = require("./next-i18next.config");
 
 const isProd = process.env.NODE_ENV === "production";
 
+// =========================================================================
+// MEDIUM FIXES: REMOVED 'unsafe-inline' (CSP: script/style-src unsafe-inline)
+// NOTE: This will break your app if you use inline styles/scripts.
+// You must move them to external files or implement a Nonce strategy.
+// =========================================================================
 let styleSources = [
   "'self'",
-  "'unsafe-inline'", // still required by Next 12 chunks
+  // "'unsafe-inline'", // <-- REMOVED: Fixes CSP: style-src unsafe-inline
   "https://fonts.googleapis.com",
   "https://cdnjs.cloudflare.com",
   "https://stackpath.bootstrapcdn.com",
@@ -442,7 +447,7 @@ let styleSources = [
 
 let scriptSources = [
   "'self'",
-  "'unsafe-inline'",
+  // "'unsafe-inline'", // <-- REMOVED: Fixes CSP: script-src unsafe-inline
   "https://*.googleapis.com",
   "https://*.google.com",
   "https://www.googletagmanager.com",
@@ -453,6 +458,9 @@ let scriptSources = [
   "https://*.zohocdn.com",
 ];
 
+// =========================================================================
+// MEDIUM FIXES: REMOVED broad wildcards 'https:' and 'wss:' (CSP: Wildcard Directive)
+// =========================================================================
 let connectSources = [
   "'self'",
   "https://api.fms.mobily.saferoad.net",
@@ -465,8 +473,8 @@ let connectSources = [
   "https://maps.googleapis.com",
   "https://maps.gstatic.com",
   "https://*.zohocdn.com",
-  "https:",
-  "wss:",
+  // "https:", // <-- REMOVED: Fixes CSP: Wildcard Directive
+  // "wss:", // <-- REMOVED: Fixes CSP: Wildcard Directive
 ];
 
 let imageSources = [
@@ -493,7 +501,7 @@ const csp = `
   default-src 'self';
   object-src 'none';
   base-uri 'self';
-  frame-ancestors 'none';
+  frame-ancestors 'none'; // FIX: Missing Anti-clickjacking Header (Medium)
   form-action 'self';
   upgrade-insecure-requests;
 
@@ -510,9 +518,33 @@ const csp = `
   .trim();
 
 const securityHeaders = [
+  // FIX: Content Security Policy (CSP) Header Not Set (Medium)
   { key: "Content-Security-Policy", value: csp },
-  { key: "X-Frame-Options", value: "DENY" }, // Clickjacking fix
+
+  // FIX: Missing Anti-clickjacking Header (Medium) - Redundant with CSP frame-ancestors, but good fallback.
+  { key: "X-Frame-Options", value: "DENY" },
+
+  // FIX: Cross-Domain Misconfiguration (Medium)
+  // This explicitly restricts resources to the same origin.
+  // This *overrides* any existing overly broad Access-Control-Allow-Origin: * header.
+  // If you need CORS for specific endpoints, this header should be moved to a conditional block or API route.
+  {
+    key: "Access-Control-Allow-Origin",
+    value: "self",
+  },
+
+  // =========================================================================
+  // LOW FIXES (X-Content-Type-Options Header Missing & Strict-Transport-Security Header Not Set)
+  // =========================================================================
   { key: "X-Content-Type-Options", value: "nosniff" },
+
+  // Only use this if the site is ONLY served over HTTPS. Vercel enforces this.
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+
+  // Other standard security headers
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
