@@ -224,20 +224,23 @@ function VehicleManagment() {
                   pathname: `/vehicle/[vehicleId]`,
                   query: { vehicleId: params.data.VehicleID },
                 }}
-                passHref>
+                passHref
+              >
                 {params.value}
               </Link>
             </div>
             <div
               className="d-flex align-items-center  justify-content-start gap-2 options flex-wrap "
-              style={{ width: "120%" }}>
+              style={{ width: "120%" }}
+            >
               <p
                 className="edit-vehicle"
                 onClick={() => {
                   setEditID(params.data.VehicleID);
                   setEditModalShow(true);
                 }}
-                style={{ cursor: "pointer" }}>
+                style={{ cursor: "pointer" }}
+              >
                 {t("Edit")}
               </p>
 
@@ -250,7 +253,8 @@ function VehicleManagment() {
                   });
                 }}
                 className="m-0 delete-vehicle"
-                style={{ cursor: "pointer" }}>
+                style={{ cursor: "pointer" }}
+              >
                 {t("Delete")}
               </p>
 
@@ -265,7 +269,8 @@ function VehicleManagment() {
                     isAssignTable: true,
                   });
                 }}
-                className="">
+                className=""
+              >
                 | {t("Edit Accessories")}
               </span>
             </div>
@@ -350,7 +355,8 @@ function VehicleManagment() {
                 onClick={() => {
                   setAssignModalShow(true);
                   setAssignVehicleID(params.data.VehicleID);
-                }}>
+                }}
+              >
                 {t("Assign Device")} |
               </span>
               <span
@@ -358,7 +364,8 @@ function VehicleManagment() {
                   setEditID(params.data.VehicleID);
                   setEditModalShow(true);
                 }}
-                className="">
+                className=""
+              >
                 {t("edit")}
               </span>
               <span
@@ -369,7 +376,8 @@ function VehicleManagment() {
                     isAssignTable: false,
                   });
                 }}
-                className="">
+                className=""
+              >
                 | {t("delete")}
               </span>
             </div>
@@ -477,7 +485,8 @@ function VehicleManagment() {
                   iconColor="info"
                   title={t("Registered_Vehicle_to_WASL")}
                   countEnd={vehiclesStatistics.registerdtoWASL}
-                  desc={t("Registered Vehicle to WASL.")}>
+                  desc={t("Registered Vehicle to WASL.")}
+                >
                   <WaslIntegration width={"40px"} fill={"currentColor"} />
                 </CardCountStart>
               </Row>
@@ -492,7 +501,8 @@ function VehicleManagment() {
                       <a>
                         <Button
                           type="button"
-                          className="btn btn-primary  px-3 py-2 me-3  add-new-vehicle">
+                          className="btn btn-primary  px-3 py-2 me-3  add-new-vehicle"
+                        >
                           <FontAwesomeIcon
                             className="me-2"
                             icon={faSimCard}
@@ -508,7 +518,8 @@ function VehicleManagment() {
                       className="btn btn-primary  px-3 py-2 me-3  add-bulk"
                       onClick={() => {
                         setBulkModel(true);
-                      }}>
+                      }}
+                    >
                       <FontAwesomeIcon
                         className="me-2"
                         icon={faSimCard}
@@ -595,7 +606,8 @@ function VehicleManagment() {
         updateButton={"Update"}
         footer={false}
         size={"xl"}
-        className={"mt-5"}>
+        className={"mt-5"}
+      >
         <Edit
           handleModel={() => {
             setEditModalShow(false);
@@ -629,7 +641,8 @@ function VehicleManagment() {
         updateButton={"Update"}
         footer={false}
         size={"xl"}
-        className={"mt-5"}>
+        className={"mt-5"}
+      >
         <AssignDevice
           handleModel={() => {
             setAssignModalShow(false);
@@ -645,7 +658,8 @@ function VehicleManagment() {
         updateButton={t("Update")}
         footer={false}
         size={"xl"}
-        className={"mt-5"}>
+        className={"mt-5"}
+      >
         <Bulk
           excelData={excelData}
           handleModel={() => {

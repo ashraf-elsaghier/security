@@ -351,7 +351,7 @@ function DriversManagement() {
                 columnDefs={columns}
                 rowData={DataTable}
                 // onCellMouseOver={(e) =>
-                //   (e?.event?.target?.dataset?.test = "showActions")
+                //   (e.event.target.dataset.test = "showActions")
                 // }
                 // onCellMouseOut={HideActions}
                 paginationNumberFormatter={function (params) {

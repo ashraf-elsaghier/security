@@ -18,7 +18,7 @@ const InputsFilter = ({
   setSelectedVehicles,
   selectedVehicles,
   setclusterToggle,
-  setTreeFilter
+  setTreeFilter,
 }) => {
   const [currentTimeOut, setCurrentTimeOut] = useState(null);
   const [filterBy, setfilterBy] = useState("DisplayName");
@@ -49,14 +49,15 @@ const InputsFilter = ({
 
       setAllTreeData(
         vehicles.filter((e) => {
-          const condition = (e?.Speed >= (speedFromRef.current?.value?.length
-            ? speedFromRef.current.value
-            : 0) &&
+          const condition =
+            e?.Speed >=
+              (speedFromRef.current?.value?.length
+                ? speedFromRef.current.value
+                : 0) &&
             e?.Speed <=
-            (speedToRef.current?.value?.length
-              ? speedToRef.current.value
-              : 200)
-          );
+              (speedToRef.current?.value?.length
+                ? speedToRef.current.value
+                : 200);
           if (
             selectedSerials.length &&
             !condition &&
@@ -78,32 +79,50 @@ const InputsFilter = ({
   const handleChange = (e) => {
     setFilterStatus("InputFilter");
     const value = e.target.value;
-    setTreeFilter(value)
+    setTreeFilter(value);
     clearTimeout(currentTimeOut);
     const timeout = setTimeout(() => {
-      let filteredVehicles = []
+      let filteredVehicles = [];
       switch (e.target.name) {
         case "address":
-          filteredVehicles = vehicles.filter((e) => e?.Address?.toLowerCase().replace(/\s/g, "").includes(value.toLowerCase().replace(/\s/g, "")))
+          filteredVehicles = vehicles.filter((e) =>
+            e?.Address?.toLowerCase()
+              .replace(/\s/g, "")
+              .includes(value.toLowerCase().replace(/\s/g, ""))
+          );
           setAllTreeData(filteredVehicles);
           break;
         case "PlateNumber":
-          filteredVehicles  = vehicles.filter((e) =>e?.PlateNumber?.replace(/\s/g, "").toLowerCase()?.includes(value.trim()?.replace(/\s/g, "")?.toLowerCase()))
+          filteredVehicles = vehicles.filter((e) =>
+            e?.PlateNumber?.replace(/\s/g, "")
+              .toLowerCase()
+              ?.includes(value.trim()?.replace(/\s/g, "")?.toLowerCase())
+          );
           setAllTreeData(filteredVehicles);
           break;
         case "DisplayName":
-          filteredVehicles = vehicles.filter((e) =>e?.DisplayName?.replace(/\s/g, "").toLowerCase()?.includes(value?.replace(/\s/g, "")?.toLowerCase()))
+          filteredVehicles = vehicles.filter((e) =>
+            e?.DisplayName?.replace(/\s/g, "")
+              .toLowerCase()
+              ?.includes(value?.replace(/\s/g, "")?.toLowerCase())
+          );
           setAllTreeData(filteredVehicles);
           break;
         case "SerialNumber":
-          filteredVehicles = vehicles.filter((e) => e?.SerialNumber?.includes(value.trim()))
+          filteredVehicles = vehicles.filter((e) =>
+            e?.SerialNumber?.includes(value.trim())
+          );
           setAllTreeData(filteredVehicles);
           break;
         default:
           break;
       }
       if (selectedVehicles.length) {
-        myMap.rezoomToCoordinates(filteredVehicles.filter((v)=>selectedSerials.includes(`${v.SerialNumber}`)).map((v)=> [v.Latitude,v.Longitude]))
+        myMap.rezoomToCoordinates(
+          filteredVehicles
+            .filter((v) => selectedSerials.includes(`${v.SerialNumber}`))
+            .map((v) => [v.Latitude, v.Longitude])
+        );
       }
     }, 500);
     setCurrentTimeOut(timeout);
@@ -112,37 +131,41 @@ const InputsFilter = ({
     clearTimeout(currentTimeOut);
     setFilterStatus("InputFilter");
     if (!speedToRef.current.value && !speedFromRef.current.value) {
-      setAllTreeData(vehicles)
-    }
-    else {
-
+      setAllTreeData(vehicles);
+    } else {
       const filteredVehicles = vehicles.filter(
         (e) =>
-          e?.Speed >= (speedFromRef.current?.value?.length
-            ? speedFromRef.current.value
-            : 0) &&
+          e?.Speed >=
+            (speedFromRef.current?.value?.length
+              ? speedFromRef.current.value
+              : 0) &&
           e?.Speed <=
-          (speedToRef.current?.value?.length
-            ? speedToRef.current.value
-            : 200)
+            (speedToRef.current?.value?.length ? speedToRef.current.value : 200)
       );
       const timeout = setTimeout(() => {
         selectedVehicles.forEach((veh) => {
-          const { value: speedFromValue, name: speedFromName } = speedFromRef?.current
-          const { value: speedToValue, name: speedToName } = speedToRef?.current
-          if ((veh.Speed < speedFromValue && speedFromName == "speedFrom")) {
-            myMap.unpin(veh.VehicleID)
+          const { value: speedFromValue, name: speedFromName } =
+            speedFromRef?.current;
+          const { value: speedToValue, name: speedToName } =
+            speedToRef?.current;
+          if (veh.Speed < speedFromValue && speedFromName == "speedFrom") {
+            myMap.unpin(veh.VehicleID);
           }
 
-          if ((speedToValue && veh.Speed > speedToValue && speedToName == "speedTo")) {
-
-            myMap.unpin(veh.VehicleID)
+          if (
+            speedToValue &&
+            veh.Speed > speedToValue &&
+            speedToName == "speedTo"
+          ) {
+            myMap.unpin(veh.VehicleID);
           }
+        });
 
-        })
-
-
-        setSelectedVehicles(filteredVehicles.filter((v) => selectedSerials.includes(`${v.SerialNumber}`)));
+        setSelectedVehicles(
+          filteredVehicles.filter((v) =>
+            selectedSerials.includes(`${v.SerialNumber}`)
+          )
+        );
         setAllTreeData(filteredVehicles);
       }, 500);
       setCurrentTimeOut(timeout);
@@ -150,13 +173,18 @@ const InputsFilter = ({
   };
   useEffect(() => {
     if (filterStatus !== "InputFilter") {
-      displayNameRef.current?.value = "";
-      serialNumberRef.current?.value = "";
-      plateNumberRef.current?.value = "";
-      addressRef.current?.value = "";
-      speedToRef.current?.value = "";
-      speedFromRef.current?.value = "";
-      setSelectedVehicles([])
+      [
+        displayNameRef,
+        serialNumberRef,
+        plateNumberRef,
+        addressRef,
+        speedToRef,
+        speedFromRef,
+      ].forEach((ref) => {
+        if (ref?.current) ref.current.value = "";
+      });
+
+      setSelectedVehicles([]);
     }
   }, [filterStatus]);
   return (
@@ -237,18 +265,21 @@ const InputsFilter = ({
               return (
                 <Dropdown.Item
                   onClick={() => {
-                    displayNameRef.current?.value = "";
-                    serialNumberRef.current?.value = "";
-                    plateNumberRef.current?.value = "";
-                    addressRef.current?.value = "";
-                    speedToRef.current?.value = "";
-                    speedFromRef.current?.value = "";
+                    displayNameRef?.current &&
+                      (displayNameRef.current.value = "");
+                    serialNumberRef?.current &&
+                      (serialNumberRef.current.value = "");
+                    plateNumberRef?.current &&
+                      (plateNumberRef.current.value = "");
+                    addressRef?.current && (addressRef.current.value = "");
+                    speedToRef?.current && (speedToRef.current.value = "");
+                    speedFromRef?.current && (speedFromRef.current.value = "");
                     setAllTreeData(vehicles);
                     setFilterStatus("InputFilter");
                     setfilterBy(item);
                     // setSelectedVehicles([]);
                     // myMap.deselectAll()
-                    setTreeFilter("")
+                    setTreeFilter("");
                   }}
                   key={key}
                   href="#"

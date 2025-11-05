@@ -281,7 +281,7 @@ const ShowLandMarks = ({
         columnDefs={columns}
         rowData={loading ? t("loading") : Data_table}
         rowSelection={"multiple"}
-        // onCellMouseOver={(e) => (e?.event?.target?.dataset?.test = "showActions")}
+        // onCellMouseOver={(e) => (e.event.target.dataset.test = "showActions")}
         // onCellMouseOut={HideActions}
         paginationNumberFormatter={function (params) {
           return params.value.toLocaleString();

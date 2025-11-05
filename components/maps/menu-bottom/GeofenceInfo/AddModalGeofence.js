@@ -68,24 +68,24 @@ const AddModalGeofence = ({
 
   let drawControl = new L.Control.Draw(options);
 
-  L.drawLocal?.draw?.toolbar?.buttons.polygon = t("Draw_Polygon");
-  L.drawLocal?.draw?.toolbar?.buttons.rectangle = t("Draw_Rectangle");
-  L.drawLocal?.draw?.toolbar?.buttons.circle = t("Draw_Circle");
-  L.drawLocal?.draw?.handlers?.circle.tooltip.start = t("Draw_Circle_Tooltip");
-  L.drawLocal?.draw?.handlers?.polygon.tooltip.start = t("Draw_Polygon_Tooltip");
-  L.drawLocal?.draw?.handlers?.rectangle.tooltip.start = t("Draw_Rectangle_Tooltip");
-  L.drawLocal?.draw?.toolbar?.actions.text = t("Cancel");
-  L.drawLocal?.draw?.toolbar?.actions.title = t("Cancel_Drawing");
-  L.drawLocal?.draw?.toolbar?.undo.text = t("Delete_Last_Point");
-  L.drawLocal?.draw?.toolbar?.undo.title = t("Delete_Last_Point_Drawn");
-  L.drawLocal?.draw?.toolbar?.finish.text = t("Finish");
-  L.drawLocal?.draw?.toolbar?.finish.title = t("Finish_Drawing");
-
+  L.drawLocal.draw.toolbar.buttons.polygon = t("Draw_Polygon");
+  L.drawLocal.draw.toolbar.buttons.rectangle = t("Draw_Rectangle");
+  L.drawLocal.draw.toolbar.buttons.circle = t("Draw_Circle");
+  L.drawLocal.draw.handlers.circle.tooltip.start = t("Draw_Circle_Tooltip");
+  L.drawLocal.draw.handlers.polygon.tooltip.start = t("Draw_Polygon_Tooltip");
+  L.drawLocal.draw.handlers.rectangle.tooltip.start = t(
+    "Draw_Rectangle_Tooltip"
+  );
+  L.drawLocal.draw.toolbar.actions.text = t("Cancel");
+  L.drawLocal.draw.toolbar.actions.title = t("Cancel_Drawing");
+  L.drawLocal.draw.toolbar.undo.text = t("Delete_Last_Point");
+  L.drawLocal.draw.toolbar.undo.title = t("Delete_Last_Point_Drawn");
+  L.drawLocal.draw.toolbar.finish.text = t("Finish");
+  L.drawLocal.draw.toolbar.finish.title = t("Finish_Drawing");
 
   const drawer = new L.Draw.Circle(myMap, drawControl.options.draw.circle);
 
   const postDrawLayer = async (layer, idx = 0) => {
-
     try {
       let drawObject = {
         GeofenceRadius: null,
@@ -167,21 +167,18 @@ const AddModalGeofence = ({
           },
         };
       }
-
     } catch (e) {
       toast.error(`Error: Can Not Add Geofence `);
     }
     return { id: 0 };
   };
-  const [speedErrorMsg, setSpeedErrorMsg] = useState('')
+  const [speedErrorMsg, setSpeedErrorMsg] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const layers = myMap.groups.drawGroup.getLayers();
 
-
     if (Speed <= 300) {
-
       if (layers.length == 0) {
         toast.error(t(`Please_Draw_Geofence_on_the_map_first`));
         return;
@@ -216,7 +213,6 @@ const AddModalGeofence = ({
         setValidated(false);
       }
       setLoading(false);
-
     } else {
       toast.error(`Speed Must be less than 300`);
     }
@@ -230,15 +226,14 @@ const AddModalGeofence = ({
     const { name, value } = e.target;
     name === "Name" && setName(value);
     if (name === "Speed") {
-      setSpeed(value)
+      setSpeed(value);
       if (+value <= 300) {
-        setSpeedErrorMsg('')
+        setSpeedErrorMsg("");
       } else {
-        setSpeedErrorMsg('Speed Must Be Less Than 300')
+        setSpeedErrorMsg("Speed Must Be Less Than 300");
       }
     }
     // name === "Email" && setEmail(value);
-
   };
   useEffect(() => {
     myMap.groups.drawGroup.clearLayers();
@@ -274,7 +269,6 @@ const AddModalGeofence = ({
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row>
           <div className="col-12 col-md-4 ">
-
             <CustomInput
               ClassN="col-12  mb-3"
               required={true}
@@ -294,12 +288,17 @@ const AddModalGeofence = ({
               Name="Speed"
               Label={t("Geofence_Speed")}
               Type="number"
-
             />
-            {speedErrorMsg && <span style={{ color: "red", marginBottom: "5px" }} className="mb-1 d-block"> {speedErrorMsg} </span>}
+            {speedErrorMsg && (
+              <span
+                style={{ color: "red", marginBottom: "5px" }}
+                className="mb-1 d-block"
+              >
+                {" "}
+                {speedErrorMsg}{" "}
+              </span>
+            )}
           </div>
-
-
         </Row>
         <Row>
           <Col md={12}>
