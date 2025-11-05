@@ -538,7 +538,7 @@ const ManageDevices = () => {
                 gridApi={assignedGridApi}
                 gridColumnApi={assignedGridColumnApi}
                 onCellMouseOver={
-                  (e) => (e.event?.target?.dataset?.test = "showActions")
+                  (e) => (e.event.target.dataset.test = "showActions")
                 }
                 onCellMouseOut={HideActions}
               />
