@@ -160,9 +160,12 @@ const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
 
 // --- 2. CSP SOURCE ARRAYS ---
+
+// Note: Keeping 'unsafe-inline' for style-src is often unavoidable with Next.js/React
+// unless using a tool like emotion's nonce or extracting all critical CSS.
 let styleSources = [
   "'self'",
-  "'unsafe-inline'", // required for Next.js styles and some inline chunks
+  "'unsafe-inline'", // Needed for many Next.js style chunks, even in prod
   "https://fonts.googleapis.com",
   "https://cdnjs.cloudflare.com",
   "https://stackpath.bootstrapcdn.com",
@@ -176,10 +179,12 @@ let scriptSources = [
   "https://www.googletagmanager.com",
 ];
 
+// FIX: Added both required WebSocket domains from the error logs.
 let connectSources = [
   "'self'",
   "https://api.fms.mobily.saferoad.net",
   "wss://socketio.fms.mobily.saferoad.net",
+  "wss://socketio.fms.saferoad.net", // **<-- FIX: Added specific wss origin from error**
   "https://www.google-analytics.com",
   "https://*.googleapis.com",
   "https://*.google.com",
@@ -203,15 +208,18 @@ let fontSources = [
   "https://css.zohocdn.com",
 ];
 
-// --- 3. CONDITIONAL ADDITIONS FOR DEVELOPMENT ---
+// --- 3. CONDITIONAL ADDITIONS FOR DEVELOPMENT ONLY ---
 if (isDev) {
-  // Fixes eval/inline issues in dev tools
+  // These directives are CRITICAL for Next.js/Webpack development features (hot-reloading, source maps)
   scriptSources.push("'unsafe-eval'");
   scriptSources.push("'unsafe-inline'");
-  styleSources.push("'unsafe-inline'");
   connectSources.push("http:");
   connectSources.push("ws:");
   imageSources.push("http:");
+} else {
+  // PRODUCTION FIX: Include the specific hash for the inline script error you saw.
+  // NOTE: If this script changes, the hash must be updated. A nonce is safer.
+  scriptSources.push("'sha256-7Ayf/i8gH+ASideztFT+YbgRd62nZdTXp4RbP3P4hjk='");
 }
 
 // --- 4. BUILD FINAL CSP STRING ---
@@ -222,12 +230,14 @@ const csp = `
   frame-ancestors 'none';
   upgrade-insecure-requests;
   form-action 'self';
+  
   script-src ${scriptSources.join(" ")};
   style-src ${styleSources.join(" ")};
   style-src-elem ${styleSources.join(" ")};
   img-src ${imageSources.join(" ")};
   connect-src ${connectSources.join(" ")};
   font-src ${fontSources.join(" ")};
+  
   frame-src 'self' https://*.google.com;
   worker-src 'self' blob:;
   child-src 'self' blob:;
@@ -242,40 +252,18 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: cspValue,
   },
-  {
-    key: "X-Frame-Options",
-    value: "DENY",
-  },
-  {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
-  },
-  {
-    key: "Referrer-Policy",
-    value: "strict-origin-when-cross-origin",
-  },
-  {
-    key: "X-XSS-Protection",
-    value: "1; mode=block",
-  },
-  {
-    key: "X-Powered-By",
-    value: "",
-  },
+  // Other security headers remain unchanged and are good practice:
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-XSS-Protection", value: "1; mode=block" },
+  { key: "X-Powered-By", value: "" },
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
-
-  // --- Fix Cloudinary / Cross-Origin image blocking ---
-  {
-    key: "Cross-Origin-Embedder-Policy",
-    value: "unsafe-none",
-  },
-  {
-    key: "Cross-Origin-Opener-Policy",
-    value: "same-origin-allow-popups",
-  },
+  { key: "Cross-Origin-Embedder-Policy", value: "unsafe-none" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
 ];
 
 // --- 6. NEXT CONFIG EXPORT ---
@@ -285,6 +273,7 @@ const nextConfig = {
   swcMinify: false,
   keySeparator: ".",
   returnEmptyString: false,
+  // Ensure we only reload on prerender in development
   reloadOnPrerender: isDev,
   poweredByHeader: false,
 
