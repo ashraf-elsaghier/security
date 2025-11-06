@@ -3,69 +3,6 @@
     {
       "source": "/(.*)",
       "headers": [{ "key": "X-Frame-Options", "value": "SAMEORIGIN" }]
-    },
-    {
-      "source": "/_next/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
-    },
-    {
-      "source": "/_next/static/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
-    },
-    {
-      "source": "/_next/static/chunks/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
-    },
-    {
-      "source": "/_next/static/css/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
-    },
-    {
-      "source": "/favicon.ico",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
-    },
-    {
-      "source": "/robots.txt",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
-    },
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://security-jet.vercel.app"
-        }
-      ]
     }
   ]
 }
