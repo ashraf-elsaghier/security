@@ -438,7 +438,6 @@ const isDev = !isProd;
 // unless using a tool like emotion's nonce or extracting all critical CSS.
 let styleSources = [
   "'self'",
-  "'unsafe-inline'", // Needed for many Next.js style chunks, even in prod
   "https://fonts.googleapis.com",
   "https://cdnjs.cloudflare.com",
   "https://stackpath.bootstrapcdn.com",
@@ -487,6 +486,7 @@ if (isDev) {
   // These directives are CRITICAL for Next.js/Webpack development features (hot-reloading, source maps)
   scriptSources.push("'unsafe-eval'");
   scriptSources.push("'unsafe-inline'");
+  styleSources.push("'unsafe-inline'");
   connectSources.push("http:");
   connectSources.push("ws:");
   imageSources.push("http:");
