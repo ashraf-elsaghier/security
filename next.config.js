@@ -428,15 +428,10 @@
 
 const { i18n } = require("./next-i18next.config");
 
-// --- 1. CONFIGURATION FLAGS ---
 const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
 
-// --- 2. CSP SOURCE ARRAYS ---
-
-// Note: Keeping 'unsafe-inline' for style-src is often unavoidable with Next.js/React
-// unless using a tool like emotion's nonce or extracting all critical CSS.
-let styleSources = [
+const styleSources = [
   "'self'",
   "https://fonts.googleapis.com",
   "https://cdnjs.cloudflare.com",
@@ -444,7 +439,7 @@ let styleSources = [
   "https://css.zohocdn.com",
 ];
 
-let scriptSources = [
+const scriptSources = [
   "'self'",
   "'unsafe-inline'",
   "https://*.googleapis.com",
@@ -452,18 +447,17 @@ let scriptSources = [
   "https://www.googletagmanager.com",
 ];
 
-// FIX: Added both required WebSocket domains from the error logs.
-let connectSources = [
+const connectSources = [
   "'self'",
   "https://api.fms.mobily.saferoad.net",
   "wss://socketio.fms.mobily.saferoad.net",
-  "wss://socketio.fms.saferoad.net", // **<-- FIX: Added specific wss origin from error**
+  "wss://socketio.fms.saferoad.net",
   "https://www.google-analytics.com",
   "https://*.googleapis.com",
   "https://*.google.com",
 ];
 
-let imageSources = [
+const imageSources = [
   "'self'",
   "data:",
   "blob:",
@@ -472,7 +466,7 @@ let imageSources = [
   "https://*.gstatic.com",
 ];
 
-let fontSources = [
+const fontSources = [
   "'self'",
   "data:",
   "https://fonts.gstatic.com",
@@ -481,9 +475,7 @@ let fontSources = [
   "https://css.zohocdn.com",
 ];
 
-// --- 3. CONDITIONAL ADDITIONS FOR DEVELOPMENT ONLY ---
 if (isDev) {
-  // These directives are CRITICAL for Next.js/Webpack development features (hot-reloading, source maps)
   scriptSources.push("'unsafe-eval'");
   scriptSources.push("'unsafe-inline'");
   styleSources.push("'unsafe-inline'");
@@ -491,12 +483,9 @@ if (isDev) {
   connectSources.push("ws:");
   imageSources.push("http:");
 } else {
-  // PRODUCTION FIX: Include the specific hash for the inline script error you saw.
-  // NOTE: If this script changes, the hash must be updated. A nonce is safer.
   scriptSources.push("'sha256-7Ayf/i8gH+ASideztFT+YbgRd62nZdTXp4RbP3P4hjk='");
 }
 
-// --- 4. BUILD FINAL CSP STRING ---
 const csp = `
   default-src 'self';
   object-src 'none';
@@ -517,16 +506,11 @@ const csp = `
   child-src 'self' blob:;
 `;
 
-// Clean up spaces
-const cspValue = csp.replace(/\s+/g, " ").trim();
-
-// --- 5. SECURITY HEADERS ---
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: cspValue,
+    value: csp.replace(/\s+/g, " ").trim(),
   },
-  // Other security headers remain unchanged and are good practice:
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -540,21 +524,18 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
 ];
 
-// --- 6. NEXT CONFIG EXPORT ---
 const nextConfig = {
   reactStrictMode: true,
   i18n,
   swcMinify: false,
   keySeparator: ".",
   returnEmptyString: false,
-  // Ensure we only reload on prerender in development
   reloadOnPrerender: isDev,
   poweredByHeader: false,
-
   async headers() {
     return [
       {
-        source: "/(.*)", // apply to all routes
+        source: "/(.*)",
         headers: securityHeaders,
       },
     ];
